@@ -1,0 +1,145 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html,
+  body,
+  #root {
+    @apply min-h-screen bg-white text-ink-900 antialiased;
+    font-family: "Poppins", system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-feature-settings: "ss01", "ss02";
+  }
+
+  body {
+    background-image: radial-gradient(
+      900px 420px at 92% -8%,
+      rgba(255, 45, 61, 0.04),
+      transparent 65%
+    );
+    background-attachment: fixed;
+  }
+
+  ::selection {
+    background: rgba(236, 10, 29, 0.18);
+    color: #1f1f29;
+  }
+
+  /* Smooth anchor scrolling + Firefox scrollbar */
+  html {
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: #ec0a1d transparent;
+  }
+
+  /* WebKit / Chromium / Edge / Safari */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+    margin: 6px 0;
+  }
+  ::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(
+      180deg,
+      #ff2d3d 0%,
+      #ec0a1d 55%,
+      #c70615 100%
+    );
+    background-clip: padding-box;
+    border: 2px solid transparent;
+    border-radius: 999px;
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 255, 255, 0.25),
+      0 4px 14px -4px rgba(236, 10, 29, 0.55);
+    transition: box-shadow 200ms ease;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(
+      180deg,
+      #ff6b75 0%,
+      #ff2d3d 55%,
+      #ec0a1d 100%
+    );
+    background-clip: padding-box;
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 255, 255, 0.4),
+      0 0 18px rgba(236, 10, 29, 0.55),
+      0 6px 20px -6px rgba(236, 10, 29, 0.7);
+  }
+  ::-webkit-scrollbar-thumb:active {
+    background: linear-gradient(180deg, #c70615 0%, #860c17 100%);
+    background-clip: padding-box;
+  }
+}
+
+@layer components {
+  .container-px {
+    @apply px-5 sm:px-8 lg:px-12;
+  }
+
+  .glass {
+    @apply bg-white/70 backdrop-blur-xl border border-white/60 shadow-soft;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .btn-base {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-medium tracking-wide transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-500/40 focus-visible:ring-offset-2 focus-visible:ring-offset-white;
+  }
+
+  .btn-primary {
+    @apply btn-base bg-brand-gradient text-white shadow-glow hover:translate-y-[-1px];
+  }
+
+  .btn-secondary {
+    @apply btn-base bg-white text-ink-900 ring-1 ring-ink-200 hover:ring-ink-300 hover:bg-ink-50;
+  }
+
+  .btn-ghost {
+    @apply btn-base text-ink-700 hover:text-brand-600;
+  }
+
+  .input-base {
+    @apply w-full rounded-2xl border border-ink-200 bg-white/80 px-4 py-3 text-sm text-ink-900 placeholder:text-ink-400 shadow-soft outline-none transition-all duration-200 focus:border-brand-400 focus:ring-4 focus:ring-brand-100;
+  }
+
+  .label-base {
+    @apply text-xs font-semibold uppercase tracking-[0.14em] text-ink-700;
+  }
+
+  .section {
+    @apply py-20 sm:py-24 lg:py-28;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 rounded-full bg-brand-50 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.18em] text-brand-700 ring-1 ring-brand-100;
+  }
+
+  .card {
+    @apply rounded-3xl bg-white p-6 sm:p-8 shadow-card ring-1 ring-ink-100/80 transition-all duration-300;
+  }
+
+  .card-hover {
+    @apply hover:-translate-y-1 hover:ring-brand-100;
+  }
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
