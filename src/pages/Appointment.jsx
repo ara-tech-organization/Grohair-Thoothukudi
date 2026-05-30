@@ -17,6 +17,7 @@ import PageHero from "../components/PageHero";
 import Button from "../components/Button";
 import { hairTreatments, skinTreatments } from "../data/services";
 import { clinic } from "../data/site";
+import { submitForm } from "../lib/api";
 
 const TREATMENT_GROUPS = [
   { label: "Hair", options: hairTreatments.map((t) => t.title) },
@@ -49,13 +50,17 @@ export default function Appointment() {
     date: "",
     time: "",
     notes: "",
+    company: "", // honeypot — must stay empty
   });
   const [errors, setErrors] = useState({});
+  const [formError, setFormError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
 
   const update = (key) => (e) => {
     const value = e.target.value;
     setForm((prev) => ({ ...prev, [key]: value }));
     if (errors[key]) setErrors((prev) => ({ ...prev, [key]: undefined }));
+    if (formError) setFormError("");
   };
 
   const validate = () => {
@@ -72,9 +77,28 @@ export default function Appointment() {
     return Object.keys(next).length === 0;
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
+    if (submitting) return;
     if (!validate()) return;
+
+    setSubmitting(true);
+    setFormError("");
+    const result = await submitForm({ type: "appointment", ...form });
+    setSubmitting(false);
+
+    if (!result.ok) {
+      if (result.errors) {
+        setErrors(result.errors);
+        return;
+      }
+      setFormError(
+        result.error === "network"
+          ? "Couldn't reach the server. Check your connection and try again."
+          : "Something went wrong booking your appointment. Please try again."
+      );
+      return;
+    }
     navigate("/thank-you", { state: { type: "appointment", form } });
   };
 
@@ -225,12 +249,42 @@ export default function Appointment() {
                   />
                 </div>
 
+                {/* Honeypot — bots fill it, humans don't see it */}
+                <div
+                  className="hidden"
+                  aria-hidden="true"
+                  style={{ position: "absolute", left: "-9999px" }}
+                >
+                  <label htmlFor="ap-company">Company</label>
+                  <input
+                    id="ap-company"
+                    type="text"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    value={form.company}
+                    onChange={update("company")}
+                  />
+                </div>
+
+                {formError && (
+                  <div className="sm:col-span-2 flex items-start gap-2 rounded-2xl bg-brand-50 px-4 py-3 text-sm text-brand-700 ring-1 ring-brand-100">
+                    <AlertCircle className="mt-0.5 h-4 w-4 flex-none" />
+                    <span>{formError}</span>
+                  </div>
+                )}
+
                 <div className="sm:col-span-2 flex flex-col-reverse items-stretch justify-between gap-4 pt-2 sm:flex-row sm:items-center">
                   <p className="text-xs text-ink-400">
                     By booking, you agree to our cancellation and privacy policies.
                   </p>
-                  <Button type="submit" variant="primary">
-                    Confirm Appointment
+                  <Button
+                    type="submit"
+                    variant="primary"
+                    disabled={submitting}
+                    aria-busy={submitting}
+                    className={submitting ? "cursor-wait opacity-70" : ""}
+                  >
+                    {submitting ? "Booking…" : "Confirm Appointment"}
                     <ArrowRight className="h-4 w-4" />
                   </Button>
                 </div>

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import LogoImg from "../assets/logo.webp";
+import LogoImg from "../assets/logo.png";
 
 const SIZES = {
   sm: "h-9",
@@ -11,12 +11,12 @@ export default function Logo({ size = "md", className = "" }) {
   return (
     <Link
       to="/"
-      aria-label="Advanced GroHair & GloSkin Warangal — home"
+      aria-label="Advanced GroHair & GloSkin Tirupur — home"
       className={`inline-flex items-center transition-opacity hover:opacity-90 ${className}`}
     >
       <img
         src={LogoImg}
-        alt="Advanced GroHair & GloSkin Warangal"
+        alt="Advanced GroHair & GloSkin Tirupur"
         className={`${SIZES[size] || SIZES.md} w-auto`}
         width="600"
         height="240"

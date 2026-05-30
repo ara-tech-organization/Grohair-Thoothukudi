@@ -14,6 +14,7 @@ import PageHero from "../components/PageHero";
 import Button from "../components/Button";
 import SocialIcon from "../components/SocialIcon";
 import { clinic } from "../data/site";
+import { submitForm } from "../lib/api";
 
 export default function Contact() {
   const navigate = useNavigate();
@@ -22,12 +23,16 @@ export default function Contact() {
     email: "",
     phone: "",
     message: "",
+    company: "", // honeypot — must stay empty
   });
   const [errors, setErrors] = useState({});
+  const [formError, setFormError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
 
   const update = (key) => (e) => {
     setForm((prev) => ({ ...prev, [key]: e.target.value }));
     if (errors[key]) setErrors((prev) => ({ ...prev, [key]: undefined }));
+    if (formError) setFormError("");
   };
 
   const validate = () => {
@@ -43,9 +48,28 @@ export default function Contact() {
     return Object.keys(next).length === 0;
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
+    if (submitting) return;
     if (!validate()) return;
+
+    setSubmitting(true);
+    setFormError("");
+    const result = await submitForm({ type: "contact", ...form });
+    setSubmitting(false);
+
+    if (!result.ok) {
+      if (result.errors) {
+        setErrors(result.errors);
+        return;
+      }
+      setFormError(
+        result.error === "network"
+          ? "Couldn't reach the server. Check your connection and try again."
+          : "Something went wrong sending your message. Please try again."
+      );
+      return;
+    }
     navigate("/thank-you", { state: { type: "contact" } });
   };
 
@@ -66,7 +90,7 @@ export default function Contact() {
 
       <section className="section">
         <div className="container-px mx-auto max-w-7xl">
-          <div className="grid gap-10 lg:grid-cols-12">
+          <div className="grid items-start gap-10 lg:grid-cols-12">
             {/* FORM */}
             <motion.div
               initial={{ opacity: 0, y: 18 }}
@@ -141,12 +165,42 @@ export default function Contact() {
                   />
                   {errors.message && <FieldError text={errors.message} />}
                 </div>
+                {/* Honeypot — bots fill it, humans don't see it */}
+                <div
+                  className="hidden"
+                  aria-hidden="true"
+                  style={{ position: "absolute", left: "-9999px" }}
+                >
+                  <label htmlFor="contact-company">Company</label>
+                  <input
+                    id="contact-company"
+                    type="text"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    value={form.company}
+                    onChange={update("company")}
+                  />
+                </div>
+
+                {formError && (
+                  <div className="sm:col-span-2 flex items-start gap-2 rounded-2xl bg-brand-50 px-4 py-3 text-sm text-brand-700 ring-1 ring-brand-100">
+                    <AlertCircle className="mt-0.5 h-4 w-4 flex-none" />
+                    <span>{formError}</span>
+                  </div>
+                )}
+
                 <div className="sm:col-span-2 flex items-center justify-between gap-4 pt-2">
                   <p className="text-xs text-ink-400">
                     By sending this form, you agree to our privacy practices.
                   </p>
-                  <Button type="submit" variant="primary">
-                    Send Message
+                  <Button
+                    type="submit"
+                    variant="primary"
+                    disabled={submitting}
+                    aria-busy={submitting}
+                    className={submitting ? "cursor-wait opacity-70" : ""}
+                  >
+                    {submitting ? "Sending…" : "Send Message"}
                     <Send className="h-4 w-4" />
                   </Button>
                 </div>
@@ -209,18 +263,30 @@ export default function Contact() {
 
                 <div className="mt-7 border-t border-ink-100 pt-5">
                   <div className="label-base">Follow us</div>
-                  <div className="mt-3 flex items-center gap-2">
-                    {clinic.socials.map((s) => (
-                      <a
-                        key={s.label}
-                        href={s.href}
-                        target="_blank"
-                        rel="noreferrer"
-                        aria-label={s.label}
-                        className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white text-ink-600 ring-1 ring-ink-200 transition-all duration-300 hover:bg-brand-gradient hover:text-white hover:ring-transparent"
-                      >
-                        <SocialIcon name={s.label} />
-                      </a>
+                  <div className="mt-3 flex flex-wrap gap-x-8 gap-y-4">
+                    {[
+                      { brand: "GloSkin", items: clinic.socials.skin },
+                      { brand: "GroHair", items: clinic.socials.hair },
+                    ].map((group) => (
+                      <div key={group.brand}>
+                        <div className="text-[11px] font-medium uppercase tracking-[0.16em] text-ink-400">
+                          {group.brand}
+                        </div>
+                        <div className="mt-2 flex items-center gap-2">
+                          {group.items.map((s) => (
+                            <a
+                              key={s.label}
+                              href={s.href}
+                              target="_blank"
+                              rel="noreferrer"
+                              aria-label={`${group.brand} on ${s.label}`}
+                              className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white text-ink-600 ring-1 ring-ink-200 transition-all duration-300 hover:bg-brand-gradient hover:text-white hover:ring-transparent"
+                            >
+                              <SocialIcon name={s.label} />
+                            </a>
+                          ))}
+                        </div>
+                      </div>
                     ))}
                   </div>
                 </div>
@@ -237,9 +303,7 @@ export default function Contact() {
                 <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-ink-50">
                   <iframe
                     title={`${clinic.shortName} ${clinic.city} — location map`}
-                    src={`https://www.google.com/maps?q=${encodeURIComponent(
-                      `${clinic.shortName} ${clinic.city}, ${clinic.address}`
-                    )}&output=embed`}
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3542.7657585874626!2d77.33180147504693!3d11.122046089048496!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba90706642ca7af%3A0xfb1f4d90d074086d!2sAdvanced%20GroHair%20%26%20GloSkin%20-%20Tiruppur!5e1!3m2!1sen!2sin!4v1778218616240!5m2!1sen!2sin"
                     width="100%"
                     height="100%"
                     loading="lazy"

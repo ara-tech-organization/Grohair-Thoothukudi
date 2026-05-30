@@ -1,0 +1,99 @@
+# Upload to the same web root as index.html and mail.php
+# (e.g. public_html/ on cPanel, htdocs/ on most LAMP hosts)
+
+Options -Indexes
+DirectoryIndex index.html
+ServerSignature Off
+
+# ===================================================================
+# Force HTTPS + canonical (non-www) host
+# ===================================================================
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # http -> https
+    RewriteCond %{HTTPS} !=on
+    RewriteCond %{HTTP:X-Forwarded-Proto} !=https
+    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+    # www -> apex (drop this block if you prefer www as canonical)
+    RewriteCond %{HTTP_HOST} ^www\.adgrohairgloskintiruppur\.com$ [NC]
+    RewriteRule ^ https://adgrohairgloskintiruppur.com%{REQUEST_URI} [L,R=301]
+
+    # ---------------------------------------------------------------
+    # SPA fallback — React Router needs every non-file URL to serve
+    # index.html so client-side routing can take over. mail.php and
+    # any real file/dir continue to be served normally.
+    # ---------------------------------------------------------------
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    RewriteRule ^ index.html [L]
+</IfModule>
+
+# ===================================================================
+# Compression
+# ===================================================================
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript
+    AddOutputFilterByType DEFLATE application/javascript application/json application/xml
+    AddOutputFilterByType DEFLATE image/svg+xml font/ttf font/otf application/font-woff application/font-woff2
+</IfModule>
+
+# ===================================================================
+# Cache headers
+#   - hashed Vite assets in /assets/  -> 1 year, immutable
+#   - index.html / service worker     -> no cache (so deploys go live)
+#   - mail.php                        -> never cache
+# ===================================================================
+<IfModule mod_headers.c>
+    <FilesMatch "\.(js|css|woff2?|ttf|otf|eot|jpg|jpeg|png|gif|webp|avif|svg|ico)$">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </FilesMatch>
+
+    <FilesMatch "^(index\.html|sw\.js|manifest\.webmanifest)$">
+        Header set Cache-Control "no-cache, no-store, must-revalidate"
+        Header set Pragma "no-cache"
+        Header set Expires "0"
+    </FilesMatch>
+
+    <Files "mail.php">
+        Header set Cache-Control "no-store"
+    </Files>
+
+    # ---------------------------------------------------------------
+    # Security headers
+    # ---------------------------------------------------------------
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+    Header set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+</IfModule>
+
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/css                     "access plus 1 year"
+    ExpiresByType application/javascript       "access plus 1 year"
+    ExpiresByType image/jpeg                   "access plus 1 year"
+    ExpiresByType image/png                    "access plus 1 year"
+    ExpiresByType image/webp                   "access plus 1 year"
+    ExpiresByType image/svg+xml                "access plus 1 year"
+    ExpiresByType font/woff2                   "access plus 1 year"
+    ExpiresByType text/html                    "access plus 0 seconds"
+</IfModule>
+
+# ===================================================================
+# Block access to dotfiles and source / config files
+# ===================================================================
+<FilesMatch "^\.(?!well-known)">
+    Require all denied
+</FilesMatch>
+
+<FilesMatch "(?i)\.(env|ini|log|sh|sql|bak|swp)$">
+    Require all denied
+</FilesMatch>
+
+# Custom 404 falls through to SPA fallback above; if mod_rewrite is
+# unavailable, uncomment the next line so client routes still work.
+# ErrorDocument 404 /index.html

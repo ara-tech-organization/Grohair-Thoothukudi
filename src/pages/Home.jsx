@@ -110,7 +110,7 @@ export default function Home() {
             >
               Hair &amp; Skin Wellness in{" "}
               <span className="bg-brand-gradient bg-clip-text text-transparent">
-                Warangal
+                Tirupur
               </span>{" "}
               — Tailored to Your Lifestyle
             </motion.h1>
@@ -122,7 +122,7 @@ export default function Home() {
               className="mt-6 max-w-xl text-balance text-base leading-relaxed text-ink-700 sm:text-lg"
             >
               Advanced GroHair and GloSkin proudly bring expert care in hair restoration
-              and skin health to Warangal. Our certified trichologists and
+              and skin health to Tirupur. Our certified trichologists and
               skincare professionals deliver customized treatments focused on
               effective, lasting results.
             </motion.p>
@@ -187,14 +187,14 @@ export default function Home() {
                   <>
                     Welcome to Advanced GroHair &amp; GloSkin{" "}
                     <span className="bg-brand-gradient bg-clip-text text-transparent">
-                      Warangal
+                      Tirupur
                     </span>
                   </>
                 }
-                description="Advanced GroHair and GloSkin combine deep expertise in hair and skin wellness with the serene pace of Warangal. Our clinic blends clinical precision with a luxurious experience, delivered by trained professionals in a safe, sterile setting."
+                description="Advanced GroHair and GloSkin combine deep expertise in hair and skin wellness with the serene pace of Tirupur. Our clinic blends clinical precision with a luxurious experience, delivered by trained professionals in a safe, sterile setting."
               />
               <p className="mt-6 max-w-md text-sm leading-relaxed text-ink-500">
-                At our Warangal center, you'll find the best of science,
+                At our Tirupur center, you'll find the best of science,
                 technology, and personalized care. Whether it's hair thinning,
                 pigmentation issues, premature aging, or any other concern —
                 you'll find solutions tailored just for you, backed by trusted
@@ -402,7 +402,7 @@ function ServicesBento() {
   const aging = byTitle("Anti Aging");
 
   return (
-    <div className="grid gap-5 lg:grid-cols-12 lg:auto-rows-[200px]">
+    <div className="grid gap-5 lg:grid-cols-12 lg:auto-rows-[240px]">
       {/* FEATURE — heading + CTA */}
       <motion.div
         initial={{ opacity: 0, y: 18 }}
@@ -428,7 +428,7 @@ function ServicesBento() {
           <h2 className="mt-5 text-balance text-3xl font-semibold leading-[1.1] tracking-tight sm:text-4xl lg:text-[44px]">
             Leading Hair &amp; Skin Treatments at Advanced GroHair &amp; GloSkin —{" "}
             <span className="bg-gradient-to-r from-white to-brand-200 bg-clip-text text-transparent">
-              Warangal
+              Tirupur
             </span>
           </h2>
           <p className="mt-5 max-w-xl text-sm leading-relaxed text-white/75 sm:text-base">

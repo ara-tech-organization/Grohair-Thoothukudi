@@ -58,7 +58,7 @@ export default function Services() {
           {/* <SectionHeader
             eyebrow="Treatments"
             title="Our complete treatment menu"
-            description="Every treatment below is offered at our Warangal clinic by trained specialists. Use the filters to narrow down what's most relevant for you."
+            description="Every treatment below is offered at our Tirupur clinic by trained specialists. Use the filters to narrow down what's most relevant for you."
           /> */}
 
           <div className="mt-10 flex justify-center">

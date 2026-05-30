@@ -1,24 +1,40 @@
 export const clinic = {
   name: "Advanced GroHair & GloSkin",
   shortName: "Advanced GroHair & GloSkin",
-  city: "Warangal",
-  tagline: "Hair & Skin Wellness in Warangal — Tailored to Your Lifestyle",
+  city: "Tirupur",
+  tagline: "Hair & Skin Wellness in Tirupur — Tailored to Your Lifestyle",
   description:
     "Restore your confidence today with our expert hair restoration and skin wellness solutions. Book your consultation now.",
-  phone: "+91 94188 56789",
-  email: "warangal@grohair.com",
+  phone: "+91 96260 56789",
+  email: "tiruppur@adgrohair.com",
   address:
-    "Vaddiraj Complex, 1-8-526, Hyderabad – Warangal Hwy, beside Tirumala Music Centre, Nakkala Gutta, Hanamkonda, Telangana 506001",
+    "1st Floor, 172/2, Marudhachalapuram Main Road, near 60 Feet Road, near Bishop Ubagaraswamy Higher Secondary School, M G R Nagar, Weavers Colony, Tiruppur, Tamil Nadu 641602",
   hours: [
     { day: "Monday – Saturday", time: "10:00 AM – 8:00 PM" },
     { day: "Sunday", time: "By appointment" },
   ],
-  socials: [
-    { label: "Instagram", href: "https://instagram.com" },
-    { label: "Facebook", href: "https://facebook.com" },
-    { label: "Twitter", href: "https://twitter.com" },
-    { label: "LinkedIn", href: "https://linkedin.com" },
-  ],
+  socials: {
+    skin: [
+      {
+        label: "Facebook",
+        href: "https://www.facebook.com/profile.php?id=61554045335997",
+      },
+      {
+        label: "Instagram",
+        href: "https://www.instagram.com/adgloskinclinictirupur",
+      },
+    ],
+    hair: [
+      {
+        label: "Facebook",
+        href: "https://www.facebook.com/profile.php?id=61554126093238",
+      },
+      {
+        label: "Instagram",
+        href: "https://www.instagram.com/adgrohairclinictirupur",
+      },
+    ],
+  },
 };
 
 export const navLinks = [

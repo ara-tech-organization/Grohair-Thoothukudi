@@ -24,18 +24,30 @@ export default function Footer() {
               specialists, calm spaces, and advanced treatments — all designed
               around how care should actually feel.
             </p>
-            <div className="mt-6 flex items-center gap-2">
-              {clinic.socials.map((s) => (
-                <a
-                  key={s.label}
-                  href={s.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label={s.label}
-                  className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white text-ink-600 ring-1 ring-ink-200 transition-all duration-300 hover:bg-brand-gradient hover:text-white hover:ring-transparent"
-                >
-                  <SocialIcon name={s.label} />
-                </a>
+            <div className="mt-6 flex flex-wrap gap-x-8 gap-y-4">
+              {[
+                { brand: "GloSkin", items: clinic.socials.skin },
+                { brand: "GroHair", items: clinic.socials.hair },
+              ].map((group) => (
+                <div key={group.brand}>
+                  <div className="text-[11px] font-medium uppercase tracking-[0.16em] text-ink-400">
+                    {group.brand}
+                  </div>
+                  <div className="mt-2 flex items-center gap-2">
+                    {group.items.map((s) => (
+                      <a
+                        key={s.label}
+                        href={s.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label={`${group.brand} on ${s.label}`}
+                        className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white text-ink-600 ring-1 ring-ink-200 transition-all duration-300 hover:bg-brand-gradient hover:text-white hover:ring-transparent"
+                      >
+                        <SocialIcon name={s.label} />
+                      </a>
+                    ))}
+                  </div>
+                </div>
               ))}
             </div>
           </div>
@@ -109,14 +121,27 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col items-start justify-between gap-4 border-t border-ink-100 pt-6 text-xs text-ink-500 sm:flex-row sm:items-center">
-          <div>
+        <div className="mt-14 flex flex-col items-start gap-4 border-t border-ink-100 pt-6 text-xs text-ink-500 sm:grid sm:grid-cols-3 sm:items-center sm:gap-4">
+          <div className="sm:justify-self-start">
             © {year} {clinic.name}. All rights reserved.
           </div>
-          <div className="flex items-center gap-5">
+          <div className="flex items-center gap-4 sm:justify-self-center">
             <Link to="/privacy" className="hover:text-ink-700">
-              Privacy
+              Privacy Policy
             </Link>
+            <span aria-hidden="true" className="text-ink-300">
+              |
+            </span>
+            <Link
+              to="/privacy#terms-and-conditions"
+              className="hover:text-ink-700"
+            >
+              Terms &amp; Conditions
+            </Link>
+          </div>
+          <div className="sm:justify-self-end">
+            Crafted by{" "}
+            <span className="font-medium text-ink-700">ARA Discoveries</span>
           </div>
         </div>
       </div>

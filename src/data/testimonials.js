@@ -9,7 +9,7 @@ export const testimonials = [
     name: "Bhavik Kumar",
     role: "GroHair client",
     quote:
-      "Professional, clean, and deeply caring. Warangal needed a place like this. Blessings!",
+      "Professional, clean, and deeply caring. Tirupur needed a place like this. Blessings!",
   },
   {
     name: "Meera Laxmi",
