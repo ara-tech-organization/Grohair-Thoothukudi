@@ -7,15 +7,12 @@ import {
   Phone,
   Clock,
   Send,
-  AlertCircle,
 } from "lucide-react";
 
 import PageHero from "../components/PageHero";
 import Button from "../components/Button";
 import SocialIcon from "../components/SocialIcon";
 import { clinic } from "../data/site";
-import { submitForm } from "../lib/api";
-
 export default function Contact() {
   const navigate = useNavigate();
   const [form, setForm] = useState({
@@ -23,16 +20,14 @@ export default function Contact() {
     email: "",
     phone: "",
     message: "",
-    company: "", // honeypot — must stay empty
+    company: "",
   });
   const [errors, setErrors] = useState({});
-  const [formError, setFormError] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
   const update = (key) => (e) => {
     setForm((prev) => ({ ...prev, [key]: e.target.value }));
     if (errors[key]) setErrors((prev) => ({ ...prev, [key]: undefined }));
-    if (formError) setFormError("");
   };
 
   const validate = () => {
@@ -48,28 +43,11 @@ export default function Contact() {
     return Object.keys(next).length === 0;
   };
 
-  const onSubmit = async (e) => {
+  const onSubmit = (e) => {
     e.preventDefault();
     if (submitting) return;
     if (!validate()) return;
-
     setSubmitting(true);
-    setFormError("");
-    const result = await submitForm({ type: "contact", ...form });
-    setSubmitting(false);
-
-    if (!result.ok) {
-      if (result.errors) {
-        setErrors(result.errors);
-        return;
-      }
-      setFormError(
-        result.error === "network"
-          ? "Couldn't reach the server. Check your connection and try again."
-          : "Something went wrong sending your message. Please try again."
-      );
-      return;
-    }
     navigate("/thank-you", { state: { type: "contact" } });
   };
 
@@ -182,12 +160,6 @@ export default function Contact() {
                   />
                 </div>
 
-                {formError && (
-                  <div className="sm:col-span-2 flex items-start gap-2 rounded-2xl bg-brand-50 px-4 py-3 text-sm text-brand-700 ring-1 ring-brand-100">
-                    <AlertCircle className="mt-0.5 h-4 w-4 flex-none" />
-                    <span>{formError}</span>
-                  </div>
-                )}
 
                 <div className="sm:col-span-2 flex items-center justify-between gap-4 pt-2">
                   <p className="text-xs text-ink-400">
