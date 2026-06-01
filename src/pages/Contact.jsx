@@ -88,7 +88,7 @@ export default function Contact() {
         description="Questions about a treatment, pricing, or your first visit? Send us a note — our team responds within one business day."
       />
 
-      <section className="section">
+      <section id="contact" className="section">
         <div className="container-px mx-auto max-w-7xl">
           <div className="grid items-start gap-10 lg:grid-cols-12">
             {/* FORM */}

@@ -1,6 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -30,6 +35,14 @@ import {
 } from "../data/services";
 import { testimonials, stats } from "../data/testimonials";
 import HeroBgImg from "../assets/treatments/hero.webp";
+import Ba1 from "../assets/ba1.webp";
+import Ba2 from "../assets/ba2.webp";
+import Ba3 from "../assets/ba3.webp";
+import Vid1 from "../assets/video1.mp4";
+import Vid2 from "../assets/video2.mp4";
+import Vid3 from "../assets/video3.mp4";
+import Vid4 from "../assets/video4.mp4";
+import Vid5 from "../assets/video5.mp4";
 
 const features = [
   {
@@ -296,6 +309,9 @@ export default function Home() {
         </div>
       </section>
 
+      {/* RESULTS — before/after + videos */}
+      <ResultsSection />
+
       {/* TRUST / STATS */}
       <section className="section">
         <div className="container-px mx-auto max-w-7xl">
@@ -341,9 +357,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* RESULTS — before/after + videos */}
-      <ResultsSection />
 
       {/* CTA BANNER */}
       <section className="section">
@@ -394,6 +407,162 @@ export default function Home() {
         </div>
       </section>
     </>
+  );
+}
+
+/* ----------------------------- ResultsSection ----------------------------- */
+
+// BEFORE / AFTER pairs — replace src values with your real image paths
+const beforeAfterPairs = [
+  { id: 1, img: Ba1 },
+  { id: 2, img: Ba2 },
+  { id: 3, img: Ba3 },
+];
+
+const resultVideos = [
+  { id: 1, src: Vid1 },
+  { id: 2, src: Vid2 },
+  { id: 3, src: Vid3 },
+  { id: 4, src: Vid4 },
+  { id: 5, src: Vid5 },
+];
+
+function ResultsSection() {
+  const [playing, setPlaying] = useState(null);
+
+  return (
+    <section className="section bg-ink-50/40">
+      <div className="container-px mx-auto max-w-7xl">
+
+        {/* heading */}
+        <div className="text-center">
+          <motion.span
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4 }}
+            className="inline-flex items-center gap-2 rounded-full bg-brand-50 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-brand-600 ring-1 ring-brand-100"
+          >
+            <span className="h-1.5 w-1.5 rounded-full bg-brand-500" />
+            Real Results
+          </motion.span>
+          <motion.h2
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.06 }}
+            className="mt-4 text-2xl font-bold tracking-tight text-ink-900 sm:text-3xl"
+          >
+            We innovate hair restoration solutions
+          </motion.h2>
+        </div>
+
+        {/* BEFORE / AFTER grid */}
+        <div className="mt-10 grid gap-5 sm:grid-cols-3">
+          {beforeAfterPairs.map((pair, i) => (
+            <motion.div
+              key={pair.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.45, delay: i * 0.08 }}
+              className="overflow-hidden rounded-2xl shadow-soft ring-1 ring-ink-100"
+            >
+              <img
+                src={pair.img}
+                alt={`Hair restoration result ${pair.id}`}
+                className="w-full object-contain"
+              />
+            </motion.div>
+          ))}
+        </div>
+
+        {/* VIDEO SWIPER CAROUSEL */}
+        <div className="relative mt-10 results-swiper">
+          <Swiper
+            modules={[Navigation, Pagination]}
+            navigation={{
+              nextEl: ".results-next",
+              prevEl: ".results-prev",
+            }}
+            pagination={{
+              el: ".results-dots",
+              clickable: true,
+              bulletClass: "results-bullet",
+              bulletActiveClass: "results-bullet-active",
+            }}
+            loop={true}
+            slidesPerView={2}
+            spaceBetween={16}
+            breakpoints={{
+              640: { slidesPerView: 4, spaceBetween: 16 },
+            }}
+            onSlideChange={() => setPlaying(null)}
+          >
+            {resultVideos.map((v) => (
+              <SwiperSlide key={v.id}>
+                <div className="relative aspect-[9/16] overflow-hidden rounded-2xl bg-ink-900 shadow-card">
+                  {playing === v.id ? (
+                    <video
+                      src={v.src}
+                      autoPlay
+                      controls
+                      className="absolute inset-0 h-full w-full object-cover"
+                    />
+                  ) : (
+                    <div
+                      className="absolute inset-0 cursor-pointer group"
+                      onClick={() => setPlaying(v.id)}
+                    >
+                      <video
+                        src={v.src}
+                        className="absolute inset-0 h-full w-full object-cover"
+                        muted
+                        preload="metadata"
+                      />
+                      <div className="absolute inset-0 bg-black/40 transition group-hover:bg-black/50" />
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <span className="flex h-14 w-14 items-center justify-center rounded-full bg-brand-600 text-white shadow-glow ring-4 ring-white/20 transition group-hover:scale-110">
+                          <Play className="h-6 w-6 translate-x-0.5" />
+                        </span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+
+          {/* custom nav arrows */}
+          <button
+            aria-label="Previous"
+            className="results-prev absolute -left-5 top-1/2 z-10 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-white shadow-card ring-1 ring-ink-100 transition-all duration-200 hover:bg-brand-gradient hover:text-white hover:ring-transparent active:scale-90"
+          >
+            <ChevronLeft className="h-5 w-5" />
+          </button>
+          <button
+            aria-label="Next"
+            className="results-next absolute -right-5 top-1/2 z-10 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-white shadow-card ring-1 ring-ink-100 transition-all duration-200 hover:bg-brand-gradient hover:text-white hover:ring-transparent active:scale-90"
+          >
+            <ChevronRight className="h-5 w-5" />
+          </button>
+
+          {/* dots */}
+          <div className="results-dots mt-5 flex justify-center gap-2" />
+        </div>
+
+        {/* CTA button */}
+        <div className="mt-10 flex justify-center">
+          <Link
+            to="/appointment"
+            className="btn-base bg-brand-gradient text-white shadow-glow hover:opacity-90"
+          >
+            Book Your Consultation Now
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
+      </div>
+    </section>
   );
 }
 

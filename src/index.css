@@ -143,3 +143,23 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/* Results swiper custom dots */
+.results-bullet {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background: #b6b6c0;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.results-bullet-active {
+  width: 24px;
+  background: #ff2d3d;
+}
+/* hide default swiper nav arrows */
+.results-swiper .swiper-button-next,
+.results-swiper .swiper-button-prev {
+  display: none;
+}
