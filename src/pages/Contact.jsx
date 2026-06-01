@@ -263,36 +263,24 @@ export default function Contact() {
 
                 <div className="mt-7 border-t border-ink-100 pt-5">
                   <div className="label-base">Follow us</div>
-                  <div className="mt-3 flex flex-wrap gap-x-8 gap-y-4">
-                    {[
-                      { brand: "GloSkin", items: clinic.socials.skin },
-                      { brand: "GroHair", items: clinic.socials.hair },
-                    ].map((group) => (
-                      <div key={group.brand}>
-                        <div className="text-[11px] font-medium uppercase tracking-[0.16em] text-ink-400">
-                          {group.brand}
-                        </div>
-                        <div className="mt-2 flex items-center gap-2">
-                          {group.items.map((s) => (
-                            <a
-                              key={s.label}
-                              href={s.href}
-                              target="_blank"
-                              rel="noreferrer"
-                              aria-label={`${group.brand} on ${s.label}`}
-                              className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white text-ink-600 ring-1 ring-ink-200 transition-all duration-300 hover:bg-brand-gradient hover:text-white hover:ring-transparent"
-                            >
-                              <SocialIcon name={s.label} />
-                            </a>
-                          ))}
-                        </div>
-                      </div>
+                  <div className="mt-3 flex items-center gap-2">
+                    {clinic.socials.map((s) => (
+                      <a
+                        key={s.label}
+                        href={s.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label={s.label}
+                        className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white text-ink-600 ring-1 ring-ink-200 transition-all duration-300 hover:bg-brand-gradient hover:text-white hover:ring-transparent"
+                      >
+                        <SocialIcon name={s.label} />
+                      </a>
                     ))}
                   </div>
                 </div>
               </motion.div>
 
-              {/* MAP — live Google Maps embed */}
+              {/* MAP */}
               <motion.div
                 initial={{ opacity: 0, y: 18 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -303,7 +291,7 @@ export default function Contact() {
                 <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-ink-50">
                   <iframe
                     title={`${clinic.shortName} ${clinic.city} — location map`}
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3542.7657585874626!2d77.33180147504693!3d11.122046089048496!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba90706642ca7af%3A0xfb1f4d90d074086d!2sAdvanced%20GroHair%20%26%20GloSkin%20-%20Tiruppur!5e1!3m2!1sen!2sin!4v1778218616240!5m2!1sen!2sin"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3914.0!2d78.1674!3d11.2189!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTHCsDEzJzA4LjAiTiA3OMKwMTAnMDIuNiJF!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
                     width="100%"
                     height="100%"
                     loading="lazy"
@@ -312,7 +300,6 @@ export default function Contact() {
                     className="absolute inset-0 h-full w-full border-0"
                   />
                 </div>
-
                 <div className="flex flex-col items-start justify-between gap-3 px-3 pb-2 pt-3 sm:flex-row sm:items-center">
                   <div className="flex items-start gap-2.5 text-xs text-ink-600">
                     <span className="mt-0.5 flex h-7 w-7 flex-none items-center justify-center rounded-full bg-brand-gradient text-white shadow-glow">

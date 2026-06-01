@@ -1,6 +1,6 @@
 const ENDPOINT =
   import.meta.env.VITE_MAIL_ENDPOINT ||
-  "https://adgrohairgloskintiruppur.com/mail.php";
+  "https://adgrohairgloskinnamakkal.com/mail.php";
 
 export async function submitForm(payload) {
   let res;

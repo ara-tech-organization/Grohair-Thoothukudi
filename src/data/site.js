@@ -1,40 +1,30 @@
 export const clinic = {
   name: "Advanced GroHair & GloSkin",
   shortName: "Advanced GroHair & GloSkin",
-  city: "Tirupur",
-  tagline: "Hair & Skin Wellness in Tirupur — Tailored to Your Lifestyle",
+  city: "Namakkal",
+  tagline: "Hair & Skin Wellness in Namakkal — Tailored to Your Lifestyle",
   description:
     "Restore your confidence today with our expert hair restoration and skin wellness solutions. Book your consultation now.",
-  phone: "+91 96260 56789",
-  email: "tiruppur@adgrohair.com",
+  phone: "+91 75998 56789",
+  email: "namakkal@adgrohair.com",
+  domain: "adgrohairnamakkal.com",
+  website: "https://adgrohairnamakkal.com",
   address:
-    "1st Floor, 172/2, Marudhachalapuram Main Road, near 60 Feet Road, near Bishop Ubagaraswamy Higher Secondary School, M G R Nagar, Weavers Colony, Tiruppur, Tamil Nadu 641602",
+    "2nd Floor, MSA COMPLEX, No.233, Salem - Namakkal Rd, opposite to Thangamayil Jewellery, R.P Pudur, Namakkal, Tamil Nadu 637001",
   hours: [
     { day: "Monday – Saturday", time: "10:00 AM – 8:00 PM" },
     { day: "Sunday", time: "By appointment" },
   ],
-  socials: {
-    skin: [
-      {
-        label: "Facebook",
-        href: "https://www.facebook.com/profile.php?id=61554045335997",
-      },
-      {
-        label: "Instagram",
-        href: "https://www.instagram.com/adgloskinclinictirupur",
-      },
-    ],
-    hair: [
-      {
-        label: "Facebook",
-        href: "https://www.facebook.com/profile.php?id=61554126093238",
-      },
-      {
-        label: "Instagram",
-        href: "https://www.instagram.com/adgrohairclinictirupur",
-      },
-    ],
-  },
+  socials: [
+    {
+      label: "Facebook",
+      href: "https://www.facebook.com/profile.php?id=61572954625426",
+    },
+    {
+      label: "Instagram",
+      href: "https://www.instagram.com/adgrohairgloskinnamakkal/",
+    },
+  ],
 };
 
 export const navLinks = [

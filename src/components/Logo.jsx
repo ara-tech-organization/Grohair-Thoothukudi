@@ -11,12 +11,12 @@ export default function Logo({ size = "md", className = "" }) {
   return (
     <Link
       to="/"
-      aria-label="Advanced GroHair & GloSkin Tirupur — home"
+      aria-label="Advanced GroHair & GloSkin Namakkal — home"
       className={`inline-flex items-center transition-opacity hover:opacity-90 ${className}`}
     >
       <img
         src={LogoImg}
-        alt="Advanced GroHair & GloSkin Tirupur"
+        alt="Advanced GroHair & GloSkin Namakkal"
         className={`${SIZES[size] || SIZES.md} w-auto`}
         width="600"
         height="240"

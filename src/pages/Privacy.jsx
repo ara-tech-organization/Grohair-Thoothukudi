@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { ArrowRight, Mail } from "lucide-react";
+import { ArrowRight, Mail, Globe } from "lucide-react";
 
 import PageHero from "../components/PageHero";
 import Button from "../components/Button";
@@ -25,7 +25,7 @@ export default function Privacy() {
       <PageHero
         eyebrow="Legal"
         title="Privacy Policy & Terms"
-        description={`How ${clinic.shortName} — ${clinic.city} collects, uses and protects your information, and the terms under which we offer our services.`}
+        description={`How ${clinic.shortName} — ${clinic.city} collects, uses and protects your information, and the terms under which we offer our services at ${clinic.domain}.`}
       />
 
       <section className="section">
@@ -36,12 +36,21 @@ export default function Privacy() {
               <P>
                 {clinic.shortName} - {clinic.city} abides to maintain privacy
                 and this applies to all the information collected from you or
-                published on our website/application. We will not unless required
-                by law, use or share the information with external or third
-                parties. Privacy policy applies to the collection, storage and
-                usage of all information from {clinic.shortName} - {clinic.city}.
-                By using the services of this application, you agree to the
-                terms and conditions of the {clinic.shortName} - {clinic.city}.
+                published on our website{" "}
+                <a
+                  href={clinic.website}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="font-medium text-brand-600 hover:underline"
+                >
+                  {clinic.domain}
+                </a>
+                . We will not unless required by law, use or share the
+                information with external or third parties. Privacy policy
+                applies to the collection, storage and usage of all information
+                from {clinic.shortName} - {clinic.city}. By using the services
+                of this website, you agree to the terms and conditions of the{" "}
+                {clinic.shortName} - {clinic.city}.
               </P>
               <P>
                 Our privacy policy and terms &amp; conditions are subject to
@@ -282,20 +291,40 @@ export default function Privacy() {
 
             {/* CONTACT */}
             <Section title="For further queries">
-              <div className="flex flex-col items-start gap-3 rounded-2xl bg-white p-5 ring-1 ring-ink-100 sm:flex-row sm:items-center sm:gap-4">
-                <span className="flex h-10 w-10 flex-none items-center justify-center rounded-xl bg-brand-50 text-brand-600 ring-1 ring-brand-100">
-                  <Mail className="h-4 w-4" />
-                </span>
-                <div>
-                  <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-ink-500">
-                    Email
+              <div className="flex flex-col gap-3 sm:flex-row sm:gap-4">
+                <div className="flex flex-1 items-center gap-3 rounded-2xl bg-white p-5 ring-1 ring-ink-100">
+                  <span className="flex h-10 w-10 flex-none items-center justify-center rounded-xl bg-brand-50 text-brand-600 ring-1 ring-brand-100">
+                    <Globe className="h-4 w-4" />
+                  </span>
+                  <div>
+                    <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-ink-500">
+                      Website
+                    </div>
+                    <a
+                      href={clinic.website}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-sm font-medium text-ink-800 hover:text-brand-600"
+                    >
+                      {clinic.domain}
+                    </a>
                   </div>
-                  <a
-                    href={`mailto:${clinic.email}`}
-                    className="text-sm font-medium text-ink-800 hover:text-brand-600"
-                  >
-                    {clinic.email}
-                  </a>
+                </div>
+                <div className="flex flex-1 items-center gap-3 rounded-2xl bg-white p-5 ring-1 ring-ink-100">
+                  <span className="flex h-10 w-10 flex-none items-center justify-center rounded-xl bg-brand-50 text-brand-600 ring-1 ring-brand-100">
+                    <Mail className="h-4 w-4" />
+                  </span>
+                  <div>
+                    <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-ink-500">
+                      Email
+                    </div>
+                    <a
+                      href={`mailto:${clinic.email}`}
+                      className="text-sm font-medium text-ink-800 hover:text-brand-600"
+                    >
+                      {clinic.email}
+                    </a>
+                  </div>
                 </div>
               </div>
             </Section>

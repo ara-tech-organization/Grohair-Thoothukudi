@@ -14,12 +14,12 @@ declare(strict_types=1);
  */
 
 // ===================== CONFIGURATION =====================
-const MAIL_TO          = 'tiruppur@adgrohair.com';                       // where form submissions are delivered
-const MAIL_FROM        = 'no-reply@adgrohairgloskintiruppur.com';        // must be on the SAME domain that hosts this file (mailbox must exist on that domain)
-const MAIL_FROM_NAME   = 'Advanced GroHair & GloSkin Tirupur';
+const MAIL_TO          = 'namakkal@adgrohair.com';                       // where form submissions are delivered
+const MAIL_FROM        = 'no-reply@adgrohairgloskinnamakkal.com';        // must be on the SAME domain that hosts this file (mailbox must exist on that domain)
+const MAIL_FROM_NAME   = 'Advanced GroHair & GloSkin Namakkal';
 const ALLOWED_ORIGINS  = [
-    'https://adgrohairgloskintiruppur.com',
-    'https://www.adgrohairgloskintiruppur.com',
+    'https://adgrohairgloskinnamakkal.com',
+    'https://www.adgrohairgloskinnamakkal.com',
 ];
 // =========================================================
 

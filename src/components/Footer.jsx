@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Phone } from "lucide-react";
 import Logo from "./Logo";
 import SocialIcon from "./SocialIcon";
 import { clinic, navLinks } from "../data/site";
@@ -24,30 +24,18 @@ export default function Footer() {
               specialists, calm spaces, and advanced treatments — all designed
               around how care should actually feel.
             </p>
-            <div className="mt-6 flex flex-wrap gap-x-8 gap-y-4">
-              {[
-                { brand: "GloSkin", items: clinic.socials.skin },
-                { brand: "GroHair", items: clinic.socials.hair },
-              ].map((group) => (
-                <div key={group.brand}>
-                  <div className="text-[11px] font-medium uppercase tracking-[0.16em] text-ink-400">
-                    {group.brand}
-                  </div>
-                  <div className="mt-2 flex items-center gap-2">
-                    {group.items.map((s) => (
-                      <a
-                        key={s.label}
-                        href={s.href}
-                        target="_blank"
-                        rel="noreferrer"
-                        aria-label={`${group.brand} on ${s.label}`}
-                        className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white text-ink-600 ring-1 ring-ink-200 transition-all duration-300 hover:bg-brand-gradient hover:text-white hover:ring-transparent"
-                      >
-                        <SocialIcon name={s.label} />
-                      </a>
-                    ))}
-                  </div>
-                </div>
+            <div className="mt-6 flex items-center gap-2">
+              {clinic.socials.map((s) => (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={s.label}
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white text-ink-600 ring-1 ring-ink-200 transition-all duration-300 hover:bg-brand-gradient hover:text-white hover:ring-transparent"
+                >
+                  <SocialIcon name={s.label} />
+                </a>
               ))}
             </div>
           </div>
@@ -96,11 +84,11 @@ export default function Footer() {
             <div className="label-base">Contact</div>
             <ul className="mt-5 space-y-4 text-sm text-ink-700">
               <li className="flex items-start gap-3">
-                <MapPin className="mt-0.5 h-4 w-4 text-brand-500" />
+                <SocialIcon name="MapPin" className="mt-0.5 h-4 w-4 flex-none text-brand-500" strokeWidth={1.8} />
                 <span>{clinic.address}</span>
               </li>
               <li className="flex items-center gap-3">
-                <Phone className="h-4 w-4 text-brand-500" />
+                <Phone className="h-4 w-4 flex-none text-brand-500" />
                 <a
                   href={`tel:${clinic.phone.replace(/\s/g, "")}`}
                   className="transition-colors hover:text-brand-600"
@@ -109,7 +97,7 @@ export default function Footer() {
                 </a>
               </li>
               <li className="flex items-center gap-3">
-                <Mail className="h-4 w-4 text-brand-500" />
+                <SocialIcon name="Mail" className="h-4 w-4 flex-none text-brand-500" strokeWidth={1.8} />
                 <a
                   href={`mailto:${clinic.email}`}
                   className="transition-colors hover:text-brand-600"
