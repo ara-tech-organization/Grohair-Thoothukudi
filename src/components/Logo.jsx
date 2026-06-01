@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
-import LogoImg from "../assets/logo.png";
+import LogoImg from "../assets/logo.webp";
 
 const SIZES = {
-  sm: "h-9",
-  md: "h-11",
-  lg: "h-14",
+  sm: "w-36",
+  md: "w-52",
+  lg: "w-64",
 };
 
 export default function Logo({ size = "md", className = "" }) {
@@ -17,7 +17,7 @@ export default function Logo({ size = "md", className = "" }) {
       <img
         src={LogoImg}
         alt="Advanced GroHair & GloSkin Namakkal"
-        className={`${SIZES[size] || SIZES.md} w-auto`}
+        className={`${SIZES[size] || SIZES.md} h-auto`}
         width="600"
         height="240"
         decoding="async"
