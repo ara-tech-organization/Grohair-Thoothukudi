@@ -11,7 +11,7 @@ import Privacy from "./pages/Privacy";
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/Grohair-Namakkal">
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
