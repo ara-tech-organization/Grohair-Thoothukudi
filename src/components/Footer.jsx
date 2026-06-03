@@ -129,7 +129,14 @@ export default function Footer() {
           </div>
           <div className="sm:justify-self-end">
             Crafted by{" "}
-            <span className="font-medium text-ink-700">ARA Discoveries</span>
+            <a
+              href="https://discovertechnologies.co/"
+              target="_blank"
+              rel="noreferrer"
+              className="font-semibold text-brand-600 hover:text-brand-700 transition-colors"
+            >
+              Ara Discover Technology
+            </a>
           </div>
         </div>
       </div>

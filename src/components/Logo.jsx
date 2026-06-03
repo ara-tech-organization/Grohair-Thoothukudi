@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
-import LogoImg from "../assets/logo.webp";
+import LogoImg from "../assets/logo.png";
 
 const SIZES = {
-  sm: "w-36",
-  md: "w-52",
-  lg: "w-64",
+  sm: "w-24",
+  md: "w-36",
+  lg: "w-44",
 };
 
 export default function Logo({ size = "md", className = "" }) {
