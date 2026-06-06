@@ -5,7 +5,6 @@ export default function SectionHeader({
   title,
   description,
   align = "center",
-  dark = false,
   className = "",
 }) {
   const isCenter = align === "center";
@@ -22,9 +21,9 @@ export default function SectionHeader({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.6 }}
           transition={{ duration: 0.45 }}
-          className={dark ? "eyebrow-dark" : "eyebrow"}
+          className="eyebrow"
         >
-          <span className="h-1 w-1 rounded-full bg-brand-400" />
+          <span className="h-1 w-1 rounded-full bg-brand-500" />
           {eyebrow}
         </motion.span>
       )}
@@ -33,7 +32,7 @@ export default function SectionHeader({
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.4 }}
         transition={{ duration: 0.55, ease: "easeOut" }}
-        className={`max-w-3xl text-balance text-3xl font-semibold leading-tight tracking-tight sm:text-4xl lg:text-5xl ${dark ? "text-white" : "text-ink-900"}`}
+        className="max-w-3xl text-balance text-3xl font-semibold leading-tight tracking-tight text-ink-900 sm:text-4xl lg:text-5xl"
       >
         {title}
       </motion.h2>
@@ -43,7 +42,7 @@ export default function SectionHeader({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 0.55, ease: "easeOut", delay: 0.05 }}
-          className={`max-w-2xl text-balance text-base leading-relaxed sm:text-lg ${dark ? "text-white/65" : "text-ink-500"}`}
+          className="max-w-2xl text-balance text-base leading-relaxed text-ink-500 sm:text-lg"
         >
           {description}
         </motion.p>

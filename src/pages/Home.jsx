@@ -220,18 +220,12 @@ export default function Home() {
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true, amount: 0.3 }}
                       transition={{ duration: 0.5, delay: i * 0.06 }}
-                      className="group relative overflow-hidden rounded-2xl bg-white p-6 shadow-soft ring-1 ring-ink-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-card"
+                      className="card card-hover"
                     >
-                      <div className="absolute inset-x-0 top-0 h-0.5 bg-brand-gradient" />
-                      <div className="flex items-start justify-between">
-                        <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-50 text-brand-600 ring-1 ring-brand-100 transition-all duration-300 group-hover:bg-brand-gradient group-hover:text-white group-hover:ring-transparent">
-                          <Icon className="h-5 w-5" strokeWidth={1.75} />
-                        </div>
-                        <span className="text-3xl font-bold text-ink-100 select-none">
-                          {String(i + 1).padStart(2, "0")}
-                        </span>
+                      <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-brand-50 text-brand-600 ring-1 ring-brand-100">
+                        <Icon className="h-5 w-5" strokeWidth={1.75} />
                       </div>
-                      <h3 className="mt-4 text-base font-semibold text-ink-900">
+                      <h3 className="mt-5 text-base font-semibold text-ink-900">
                         {f.title}
                       </h3>
                       <p className="mt-2 text-sm leading-relaxed text-ink-500">
@@ -295,43 +289,28 @@ export default function Home() {
         </div>
       </section>
 
-      {/* RESULTS — before/after + videos */}
-      <ResultsSection />
-
       {/* TRUST / STATS */}
       <section className="section">
         <div className="container-px mx-auto max-w-7xl">
-          <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-ink-900 via-ink-800 to-brand-900 p-8 shadow-card sm:p-12 lg:p-16">
-            <div aria-hidden="true" className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-brand-500/20 blur-3xl" />
-            <div aria-hidden="true" className="pointer-events-none absolute -bottom-24 -left-16 h-64 w-64 rounded-full bg-white/5 blur-3xl" />
-            <div className="relative grid items-center gap-12 lg:grid-cols-12">
+          <div className="overflow-hidden rounded-[2rem] bg-white p-8 shadow-card ring-1 ring-ink-100 sm:p-12 lg:p-16">
+            <div className="grid items-center gap-12 lg:grid-cols-12">
               <div className="lg:col-span-5">
                 <SectionHeader
                   align="left"
                   eyebrow="Why we're trusted"
                   title={`Why ${clinic.city} Clients Trust Us`}
                   description={`At Advanced GroHair & GloSkin ${clinic.city}, we combine advanced equipment, certified specialists, and client-first innovation. That's why we're known for our consistent results and top-tier service.`}
-                  dark
                 />
               </div>
               <div className="lg:col-span-7">
-                <div className="grid grid-cols-2 gap-6 sm:grid-cols-4">
-                  {stats.map((s, i) => (
-                    <motion.div
+                <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
+                  {stats.map((s) => (
+                    <StatCounter
                       key={s.label}
-                      initial={{ opacity: 0, y: 16 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.45, delay: i * 0.07 }}
-                      className="flex flex-col items-center rounded-2xl bg-white/8 p-5 text-center ring-1 ring-white/10"
-                    >
-                      <StatCounter
-                        value={s.value}
-                        suffix={s.suffix}
-                        label={s.label}
-                        dark
-                      />
-                    </motion.div>
+                      value={s.value}
+                      suffix={s.suffix}
+                      label={s.label}
+                    />
                   ))}
                 </div>
               </div>
@@ -350,17 +329,7 @@ export default function Home() {
           />
           <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {testimonials.map((t, i) => (
-              <motion.div
-                key={t.name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.45, delay: i * 0.07 }}
-                className="relative overflow-hidden rounded-2xl bg-white p-6 shadow-soft ring-1 ring-ink-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-card"
-              >
-                <span className="absolute -right-2 -top-3 text-7xl font-serif leading-none text-brand-100 select-none">"</span>
-                <TestimonialCard testimonial={t} index={i} />
-              </motion.div>
+              <TestimonialCard key={t.name} testimonial={t} index={i} />
             ))}
           </div>
         </div>

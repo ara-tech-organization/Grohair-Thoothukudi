@@ -1,27 +1,27 @@
 export const testimonials = [
   {
-    name: "Gopikrishnan",
+    name: "Krishna Kumar",
+    role: "PRP Treatment client",
+    quote:
+      "I had an excellent experience at Advance Grohair, Thoothukudi. I completed 8 PRP sessions here and I am very satisfied with the results. The doctor is highly professional, knowledgeable, and explains every step clearly before the treatment.",
+  },
+  {
+    name: "Uthaya Kumar",
+    role: "Hair Transplant client",
+    quote:
+      "Choosing Advance Grow Hair & Glow Skin for my hair transplant was a life-changer; the natural, dense results have completely restored my confidence. The skilled team provided a comfortable, professional experience from start to finish — I highly recommend them!",
+  },
+  {
+    name: "Muthu Selvi",
     role: "Verified Google Review",
     quote:
-      "I had an amazing experience at this clinic. From the moment I walked in, the staff was warm and welcoming. The clinic was clean, well-organised, and had a calming atmosphere, which made me feel comfortable right away.",
+      "Good environment, staff are very friendly, doctors are very patient and explain all details about hair and skin problems and their treatments. They suggest the best and suitable treatment. They have multiple payment modes and interest-free EMIs. Totally very satisfied.",
   },
   {
-    name: "Gokul Rajendhran",
-    role: "GFC Hair Treatment client",
+    name: "Dhivya Vivek",
+    role: "Eyebrow Microblading client",
     quote:
-      "The GFC hair treatment session was smooth and professional, with visible improvement in hair texture and strength. The process was comfortable, and the staff explained everything clearly. Overall, it felt effective and promising for long-term results.",
-  },
-  {
-    name: "Chandra Selvaraj",
-    role: "Skin Care client",
-    quote:
-      "Had a wonderful experience at this skincare clinic! The staff was incredibly welcoming, professional, and knowledgeable. They truly listened to my concerns and recommended a personalised treatment that delivered amazing results. Highly recommend!",
-  },
-  {
-    name: "Rajamani Sampath",
-    role: "Chemical Peel client",
-    quote:
-      "Had taken a peel for my face acne and oily skin. I am so satisfied that I could see the difference in my face. Doctors are very professional in explaining about the treatment.",
+      "Best place for getting your eyebrow microblading done. Result is highly satisfying. They offer an experienced person for the procedure, nice ambience, well-maintained procedure rooms, and good care. Thank you, ADGro Thoothukudi!",
   },
 ];
 

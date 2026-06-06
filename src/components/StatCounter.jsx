@@ -5,7 +5,7 @@ function easeOutCubic(t) {
   return 1 - Math.pow(1 - t, 3);
 }
 
-export default function StatCounter({ value, suffix = "", label, duration = 1600, dark = false }) {
+export default function StatCounter({ value, suffix = "", label, duration = 1600 }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, amount: 0.5 });
   const [display, setDisplay] = useState(0);
@@ -42,7 +42,7 @@ export default function StatCounter({ value, suffix = "", label, duration = 1600
           {suffix}
         </span>
       </div>
-      <div className={`mt-2 text-xs font-medium uppercase tracking-[0.18em] ${dark ? "text-white/60" : "text-ink-500"}`}>
+      <div className="mt-2 text-xs font-medium uppercase tracking-[0.18em] text-ink-500">
         {label}
       </div>
     </motion.div>
