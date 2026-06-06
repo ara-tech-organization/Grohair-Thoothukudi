@@ -24,7 +24,7 @@ const pillars = [
   {
     title: "Our Mission",
     description:
-      "To make world-class hair and skin care effortlessly accessible in Namakkal — combining clinical precision with a calm, considered patient experience.",
+      "To make world-class hair and skin care effortlessly accessible in Thoothukudi — combining clinical precision with a calm, considered patient experience.",
     icon: Compass,
   },
   {
@@ -210,7 +210,7 @@ export default function About() {
           <SectionHeader
             eyebrow="FAQs"
             title="Questions, answered"
-            description="A few things our clients in Namakkal often ask before their first visit."
+            description="A few things our clients in Thoothukudi often ask before their first visit."
           />
 
           <div className="mt-14 grid gap-6 md:grid-cols-2 lg:gap-10">

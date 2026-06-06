@@ -1,0 +1,10 @@
+# Block direct access to the shared configuration include.
+# Visitors should only ever hit send-appointment.php and send-contact.php.
+<FilesMatch "^config\.php$">
+    Require all denied
+</FilesMatch>
+
+# Make sure no caching gets in the way of dynamic mail responses.
+<IfModule mod_headers.c>
+    Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+</IfModule>

@@ -1,16 +1,16 @@
 export const clinic = {
   name: "Advanced GroHair & GloSkin",
   shortName: "Advanced GroHair & GloSkin",
-  city: "Namakkal",
-  tagline: "Hair & Skin Wellness in Namakkal — Tailored to Your Lifestyle",
+  city: "Thoothukudi",
+  tagline: "Hair & Skin Wellness in Thoothukudi — Tailored to Your Lifestyle",
   description:
     "Restore your confidence today with our expert hair restoration and skin wellness solutions. Book your consultation now.",
   phone: "+91 75998 56789",
-  email: "namakkal@adgrohair.com",
-  domain: "adgrohairnamakkal.com",
-  website: "https://adgrohairnamakkal.com",
+  email: "thoothukudi@adgrohair.com",
+  domain: "adgrohair.com",
+  website: "https://adgrohair.com",
   address:
-    "2nd Floor, MSA COMPLEX, No.233, Salem - Namakkal Rd, opposite to Thangamayil Jewellery, R.P Pudur, Namakkal, Tamil Nadu 637001",
+    "2nd Floor, MSA COMPLEX, No.233, Salem - Thoothukudi Rd, opposite to Thangamayil Jewellery, R.P Pudur, Thoothukudi, Tamil Nadu 628001",
   hours: [
     { day: "Monday – Saturday", time: "10:00 AM – 8:00 PM" },
     { day: "Sunday", time: "By appointment" },
@@ -22,7 +22,7 @@ export const clinic = {
     },
     {
       label: "Instagram",
-      href: "https://www.instagram.com/adgrohairgloskinnamakkal/",
+      href: "https://www.instagram.com/adgrohairgloskin_thoothukudi/",
     },
   ],
 };

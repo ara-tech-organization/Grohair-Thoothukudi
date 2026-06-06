@@ -34,15 +34,7 @@ import {
   skinTreatments,
 } from "../data/services";
 import { testimonials, stats } from "../data/testimonials";
-import HeroBgImg from "../assets/treatments/hero.webp";
-import Ba1 from "../assets/ba1.webp";
-import Ba2 from "../assets/ba2.webp";
-import Ba3 from "../assets/ba3.webp";
-import Vid1 from "../assets/video1.mp4";
-import Vid2 from "../assets/video2.mp4";
-import Vid3 from "../assets/video3.mp4";
-import Vid4 from "../assets/video4.mp4";
-import Vid5 from "../assets/video5.mp4";
+import HeroBgImg from "../assets/hero.png";
 
 const features = [
   {
@@ -90,24 +82,12 @@ export default function Home() {
           alt=""
           aria-hidden="true"
           fetchpriority="high"
-          className="absolute inset-0 -z-20 h-full w-full object-cover object-right"
+          className="absolute inset-0 -z-20 h-full w-full object-cover"
+          style={{ objectPosition: "right 20%" }}
         />
 
-        {/* Light-to-transparent overlay (left → right) keeps the headline crisp */}
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 -z-10 bg-gradient-to-r from-white via-white/85 to-white/20 sm:via-white/80 lg:via-white/70 lg:to-white/0"
-        />
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 -z-10 bg-gradient-to-t from-white/60 via-transparent to-transparent"
-        />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -left-24 top-20 -z-10 h-[28rem] w-[34rem] rounded-full bg-brand-100/30 blur-3xl"
-        />
 
-        <div className="container-px relative mx-auto max-w-7xl pb-24 pt-16 sm:pt-20 lg:pb-32 lg:pt-28">
+        <div className="container-px relative mx-auto max-w-7xl pt-16 pb-16 sm:pt-20 sm:pb-20 lg:pt-28 lg:pb-10">
           <div className="max-w-2xl">
             <motion.span
               initial={{ opacity: 0, y: 8 }}
@@ -127,7 +107,7 @@ export default function Home() {
             >
               Hair &amp; Skin Wellness in{" "}
               <span className="bg-brand-gradient bg-clip-text text-transparent">
-                Namakkal
+                Thoothukudi
               </span>{" "}
               — Tailored to Your Lifestyle
             </motion.h1>
@@ -139,7 +119,7 @@ export default function Home() {
               className="mt-6 max-w-xl text-balance text-base leading-relaxed text-ink-700 sm:text-lg"
             >
               Advanced GroHair and GloSkin proudly bring expert care in hair restoration
-              and skin health to Namakkal. Our certified trichologists and
+              and skin health to Thoothukudi. Our certified trichologists and
               skincare professionals deliver customized treatments focused on
               effective, lasting results.
             </motion.p>
@@ -204,14 +184,14 @@ export default function Home() {
                   <>
                     Welcome to Advanced GroHair &amp; GloSkin{" "}
                     <span className="bg-brand-gradient bg-clip-text text-transparent">
-                      Namakkal
+                      Thoothukudi
                     </span>
                   </>
                 }
-                description="Advanced GroHair and GloSkin combine deep expertise in hair and skin wellness with the serene pace of Namakkal. Our clinic blends clinical precision with a luxurious experience, delivered by trained professionals in a safe, sterile setting."
+                description="Advanced GroHair and GloSkin combine deep expertise in hair and skin wellness with the serene pace of Thoothukudi. Our clinic blends clinical precision with a luxurious experience, delivered by trained professionals in a safe, sterile setting."
               />
               <p className="mt-6 max-w-md text-sm leading-relaxed text-ink-500">
-                At our Namakkal center, you'll find the best of science,
+                At our Thoothukudi center, you'll find the best of science,
                 technology, and personalized care. Whether it's hair thinning,
                 pigmentation issues, premature aging, or any other concern —
                 you'll find solutions tailored just for you, backed by trusted
@@ -240,12 +220,18 @@ export default function Home() {
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true, amount: 0.3 }}
                       transition={{ duration: 0.5, delay: i * 0.06 }}
-                      className="card card-hover"
+                      className="group relative overflow-hidden rounded-2xl bg-white p-6 shadow-soft ring-1 ring-ink-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-card"
                     >
-                      <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-brand-50 text-brand-600 ring-1 ring-brand-100">
-                        <Icon className="h-5 w-5" strokeWidth={1.75} />
+                      <div className="absolute inset-x-0 top-0 h-0.5 bg-brand-gradient" />
+                      <div className="flex items-start justify-between">
+                        <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-50 text-brand-600 ring-1 ring-brand-100 transition-all duration-300 group-hover:bg-brand-gradient group-hover:text-white group-hover:ring-transparent">
+                          <Icon className="h-5 w-5" strokeWidth={1.75} />
+                        </div>
+                        <span className="text-3xl font-bold text-ink-100 select-none">
+                          {String(i + 1).padStart(2, "0")}
+                        </span>
                       </div>
-                      <h3 className="mt-5 text-base font-semibold text-ink-900">
+                      <h3 className="mt-4 text-base font-semibold text-ink-900">
                         {f.title}
                       </h3>
                       <p className="mt-2 text-sm leading-relaxed text-ink-500">
@@ -315,25 +301,37 @@ export default function Home() {
       {/* TRUST / STATS */}
       <section className="section">
         <div className="container-px mx-auto max-w-7xl">
-          <div className="overflow-hidden rounded-[2rem] bg-white p-8 shadow-card ring-1 ring-ink-100 sm:p-12 lg:p-16">
-            <div className="grid items-center gap-12 lg:grid-cols-12">
+          <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-ink-900 via-ink-800 to-brand-900 p-8 shadow-card sm:p-12 lg:p-16">
+            <div aria-hidden="true" className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-brand-500/20 blur-3xl" />
+            <div aria-hidden="true" className="pointer-events-none absolute -bottom-24 -left-16 h-64 w-64 rounded-full bg-white/5 blur-3xl" />
+            <div className="relative grid items-center gap-12 lg:grid-cols-12">
               <div className="lg:col-span-5">
                 <SectionHeader
                   align="left"
                   eyebrow="Why we're trusted"
                   title={`Why ${clinic.city} Clients Trust Us`}
                   description={`At Advanced GroHair & GloSkin ${clinic.city}, we combine advanced equipment, certified specialists, and client-first innovation. That's why we're known for our consistent results and top-tier service.`}
+                  dark
                 />
               </div>
               <div className="lg:col-span-7">
-                <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
-                  {stats.map((s) => (
-                    <StatCounter
+                <div className="grid grid-cols-2 gap-6 sm:grid-cols-4">
+                  {stats.map((s, i) => (
+                    <motion.div
                       key={s.label}
-                      value={s.value}
-                      suffix={s.suffix}
-                      label={s.label}
-                    />
+                      initial={{ opacity: 0, y: 16 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.45, delay: i * 0.07 }}
+                      className="flex flex-col items-center rounded-2xl bg-white/8 p-5 text-center ring-1 ring-white/10"
+                    >
+                      <StatCounter
+                        value={s.value}
+                        suffix={s.suffix}
+                        label={s.label}
+                        dark
+                      />
+                    </motion.div>
                   ))}
                 </div>
               </div>
@@ -352,7 +350,17 @@ export default function Home() {
           />
           <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {testimonials.map((t, i) => (
-              <TestimonialCard key={t.name} testimonial={t} index={i} />
+              <motion.div
+                key={t.name}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.45, delay: i * 0.07 }}
+                className="relative overflow-hidden rounded-2xl bg-white p-6 shadow-soft ring-1 ring-ink-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-card"
+              >
+                <span className="absolute -right-2 -top-3 text-7xl font-serif leading-none text-brand-100 select-none">"</span>
+                <TestimonialCard testimonial={t} index={i} />
+              </motion.div>
             ))}
           </div>
         </div>
@@ -412,20 +420,9 @@ export default function Home() {
 
 /* ----------------------------- ResultsSection ----------------------------- */
 
-// BEFORE / AFTER pairs — replace src values with your real image paths
-const beforeAfterPairs = [
-  { id: 1, img: Ba1 },
-  { id: 2, img: Ba2 },
-  { id: 3, img: Ba3 },
-];
+const beforeAfterPairs = [];
 
-const resultVideos = [
-  { id: 1, src: Vid1 },
-  { id: 2, src: Vid2 },
-  { id: 3, src: Vid3 },
-  { id: 4, src: Vid4 },
-  { id: 5, src: Vid5 },
-];
+const resultVideos = [];
 
 function ResultsSection() {
   const [playing, setPlaying] = useState(null);
@@ -436,16 +433,6 @@ function ResultsSection() {
 
         {/* heading */}
         <div className="text-center">
-          <motion.span
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4 }}
-            className="inline-flex items-center gap-2 rounded-full bg-brand-50 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-brand-600 ring-1 ring-brand-100"
-          >
-            <span className="h-1.5 w-1.5 rounded-full bg-brand-500" />
-            Real Results
-          </motion.span>
           <motion.h2
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -604,7 +591,7 @@ function ServicesBento() {
           <h2 className="mt-5 text-balance text-3xl font-semibold leading-[1.1] tracking-tight sm:text-4xl lg:text-[44px]">
             Leading Hair &amp; Skin Treatments at Advanced GroHair &amp; GloSkin —{" "}
             <span className="bg-gradient-to-r from-white to-brand-200 bg-clip-text text-transparent">
-              Namakkal
+              Thoothukudi
             </span>
           </h2>
           <p className="mt-5 max-w-xl text-sm leading-relaxed text-white/75 sm:text-base">
