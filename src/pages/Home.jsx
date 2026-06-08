@@ -65,10 +65,10 @@ const features = [
 
 // Featured treatments for the Home page.
 const skinFeatured = skinTreatments.filter((t) =>
-  ["hydra-facial", "q-switch-laser", "skin-peels"].includes(t.slug)
+  ["hydra-lift-skin-booster", "chemical-peel", "laser-hair-reduction"].includes(t.slug)
 );
 const hairFeatured = hairTreatments.filter((t) =>
-  ["hair-transplant", "mesotherapy", "stem-x-27"].includes(t.slug)
+  ["hybrid-hair-transplant", "regen-pro-9-gfc", "prp-pro-stemx27"].includes(t.slug)
 );
 
 export default function Home() {
@@ -144,7 +144,7 @@ export default function Home() {
                 Book Appointment
                 <ArrowRight className="h-4 w-4" strokeWidth={2} />
               </Button>
-              <Button to="/services" variant="secondary">
+              <Button to="/Services" variant="secondary">
                 Explore Treatments
               </Button>
             </motion.div>
@@ -261,7 +261,7 @@ export default function Home() {
                 key={t.slug}
                 service={t}
                 index={i}
-                to="/services?tab=skin"
+                to={`/services/skin/${t.slug}`}
               />
             ))}
           </div>
@@ -282,7 +282,7 @@ export default function Home() {
                 key={t.slug}
                 service={t}
                 index={i}
-                to="/services?tab=hair"
+                to={`/services/hair/${t.slug}`}
               />
             ))}
           </div>
@@ -571,7 +571,7 @@ function ServicesBento() {
 
           <div className="mt-auto flex flex-wrap items-center gap-3 pt-8">
             <Link
-              to="/services"
+              to="/Services"
               className="btn-base bg-white text-ink-900 shadow-soft hover:bg-ink-50"
             >
               Explore all treatments
@@ -592,7 +592,7 @@ function ServicesBento() {
         category={hair}
         delay={0.05}
         className="lg:col-span-5"
-        to="/services?tab=hair"
+        to="/Services/hair-treatment"
       />
 
       {/* SKIN TREATMENTS — wide */}
@@ -601,7 +601,7 @@ function ServicesBento() {
         delay={0.1}
         className="lg:col-span-5"
         accent="ink"
-        to="/services?tab=skin"
+        to="/Skin-treatment"
       />
 
       {/* Bottom row: 3 compact tiles */}

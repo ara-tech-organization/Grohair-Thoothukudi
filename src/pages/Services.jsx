@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useSearchParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { ArrowRight, Sparkles } from "lucide-react";
 
 import PageHero from "../components/PageHero";
@@ -18,15 +18,19 @@ const TABS = [
 const VALID_TABS = new Set(TABS.map((t) => t.id));
 
 export default function Services() {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const requested = searchParams.get("tab");
-  const tab = VALID_TABS.has(requested) ? requested : "all";
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const tab = location.pathname.includes("hair-treatment")
+    ? "hair"
+    : location.pathname.includes("Skin-treatment")
+    ? "skin"
+    : "all";
 
   const setTab = (next) => {
-    const params = new URLSearchParams(searchParams);
-    if (next === "all") params.delete("tab");
-    else params.set("tab", next);
-    setSearchParams(params, { replace: true });
+    if (next === "hair") navigate("/Services/hair-treatment", { replace: true });
+    else if (next === "skin") navigate("/Skin-treatment", { replace: true });
+    else navigate("/Services", { replace: true });
   };
 
   const list =
@@ -103,7 +107,12 @@ export default function Services() {
               className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
             >
               {list.map((t, i) => (
-                <ServiceCard key={t.slug} service={t} index={i} />
+                <ServiceCard
+                  key={t.slug}
+                  service={t}
+                  index={i}
+                  to={t.category === "Hair" ? `/services/hair/${t.slug}` : `/services/skin/${t.slug}`}
+                />
               ))}
             </motion.div>
           </AnimatePresence>
@@ -126,7 +135,7 @@ export default function Services() {
               Book Appointment
               <ArrowRight className="h-4 w-4" />
             </Button>
-            <Button to="/contact" variant="secondary">
+            <Button to="/Contact" variant="secondary">
               Contact the Clinic
             </Button>
           </div>

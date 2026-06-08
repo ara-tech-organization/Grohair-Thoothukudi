@@ -113,7 +113,7 @@ export default function ThankYou() {
               Return Home
             </Button>
             <Link
-              to="/services"
+              to="/Services"
               className="btn-secondary"
             >
               Explore Treatments

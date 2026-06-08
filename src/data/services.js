@@ -25,32 +25,27 @@ import {
   Waves,
 } from "lucide-react";
 
-// Treatment images — mapped from src/assets/treatments (WebP, ~1200px wide)
-import HairTransplantImg from "../assets/treatments/basic-hair-transplant-fue.webp";
-import CosmeticHairImg from "../assets/treatments/celebrity-choice.webp";
-import OltImg from "../assets/treatments/olt.webp";
-import MesotherapyImg from "../assets/treatments/mesotherapy.webp";
-import RegenProImg from "../assets/treatments/regenpro9.webp";
-import StemXImg from "../assets/treatments/stem-x-pro.webp";
-import PrpImg from "../assets/treatments/prp.webp";
-import SmpImg from "../assets/treatments/smp.webp";
-import BeardTransplantImg from "../assets/treatments/beard-transplant.webp";
-import EyebrowTransplantImg from "../assets/treatments/eyebrow-transplant.webp";
-import HairExtensionImg from "../assets/treatments/hair-extension.webp";
-import EyelashImg from "../assets/treatments/eyelash-extensions.webp";
-import MicrobladingImg from "../assets/treatments/microblading.webp";
-import SkinPeelsImg from "../assets/treatments/skin-peels.webp";
-import QSwitchImg from "../assets/treatments/q-switched-lasers.webp";
-import DiodeLaserImg from "../assets/treatments/diode-laser.webp";
-import GlutathioneImg from "../assets/treatments/glutathioneiv.webp";
-import DermaFillersImg from "../assets/treatments/dermal-fillers.webp";
-import HydraFacialImg from "../assets/treatments/hydrafacial.webp";
-import FacePrpImg from "../assets/treatments/face-prp.webp";
-import CosmelanPeelImg from "../assets/treatments/cosmelanpeel.webp";
-import RfFacialsImg from "../assets/treatments/rf-facials.webp";
-import LipMicropigmentationImg from "../assets/treatments/lip-micropigmentation.webp";
-import NdYagImg from "../assets/treatments/nd-yag-laser.webp";
-import WartRemovalImg from "../assets/treatments/wart-removal.webp";
+// Treatment images
+// Hair treatments — new images
+import GlutathioneHairImg from "../assets/treatments/glutathione-hair.jpg";
+import GcellImg from "../assets/treatments/gcell.jpg";
+import HybridHairTransplantImg from "../assets/treatments/hybrid-hair-transplant.jpg";
+import RegenPro9Img from "../assets/treatments/regen-pro9-new.png";
+import GelPrpImg from "../assets/treatments/gel-prp.jpg";
+import OltNewImg from "../assets/treatments/olt-new.png";
+import CosmeticHairSystemImg from "../assets/treatments/cosmetic-hair-system.png";
+import PrpStemX27Img from "../assets/treatments/prp-stemx27.png";
+import BeardTransplantNewImg from "../assets/treatments/beard-transplant-new.png";
+// Skin treatments — new images
+import GlutaliteIvDripImg from "../assets/treatments/glutalite-iv-drip.jpg";
+import ChemicalPeelImg from "../assets/treatments/chemical-peel.jpg";
+import PhotoCarbonImg from "../assets/treatments/photo-carbon.png";
+import LaserHairReductionImg from "../assets/treatments/laser-hair-reduction.jpg";
+import HydraLiftImg from "../assets/treatments/hydra-lift.jpg";
+import LipMicropigmentationNewImg from "../assets/treatments/lip-micropigmentation-new.png";
+import BotoxFillersImg from "../assets/treatments/botox-fillers.jpg";
+import MnrfImg from "../assets/treatments/mnrf.jpg";
+import TattooRemovalImg from "../assets/treatments/tattoo-removal.jpg";
 
 // Five top-level categories used on the Home overview.
 export const serviceCategories = [
@@ -99,91 +94,100 @@ export const serviceCategories = [
 // Full hair treatment menu.
 export const hairTreatments = [
   {
-    slug: "hair-transplant",
-    title: "Hair Transplant",
-    icon: Scissors,
-    image: HairTransplantImg,
+    slug: "glutathione-iv-drip",
+    title: "Glutathione IV Drip Therapy",
+    icon: TestTube2,
+    image: GlutathioneHairImg,
     category: "Hair",
     summary:
-      "Permanent, natural-looking hair restoration using your own follicles. Our surgeons apply refined FUE techniques for dense, undetectable results that beautifully frame your face.",
+      "Advanced wellness and skin rejuvenation treatment that delivers powerful antioxidants directly into the bloodstream. Known as the body's Master Antioxidant, Glutathione supports detoxification, skin radiance, and overall wellness.",
   },
   {
-    slug: "cosmetic-hair-system",
-    title: "Cosmetic Hair System",
-    icon: Crown,
-    image: CosmeticHairImg,
+    slug: "g-cell-therapy",
+    title: "G Cell Therapy",
+    icon: Atom,
+    image: GcellImg,
     category: "Hair",
     summary:
-      "A non-surgical route to instant volume and coverage. Custom-fitted, breathable systems designed to look, move, and feel like your own hair.",
+      "Growth-factor-rich cellular technology that stimulates dormant hair follicles, reduces hair fall, improves scalp health, and promotes natural hair regrowth. Ideal for hair thinning and early hair loss.",
+  },
+  {
+    slug: "hybrid-hair-transplant",
+    title: "Hybrid Hair Transplant",
+    icon: Scissors,
+    image: HybridHairTransplantImg,
+    category: "Hair",
+    summary:
+      "Combines modern FUE technology with enhanced graft implantation techniques to deliver superior hair density, natural hairline design, and long-lasting results. Perfect for thinning hair and receding hairlines.",
+  },
+  {
+    slug: "regen-pro-9-gfc",
+    title: "Regen Pro 9 GFC",
+    icon: Leaf,
+    image: RegenPro9Img,
+    category: "Hair",
+    summary:
+      "Highly concentrated growth factors derived from your own blood to stimulate dormant follicles, promote healthier hair growth, and improve scalp health. Safe, minimally invasive, and non-surgical.",
+  },
+  {
+    slug: "advanced-gel-prp",
+    title: "Advanced Gel PRP",
+    icon: Droplets,
+    image: GelPrpImg,
+    category: "Hair",
+    summary:
+      "Combines PRP therapy with a specialized gel matrix for prolonged growth factor release, stimulating hair regrowth, improving scalp health, and reducing hair fall. Ideal for early to moderate hair loss.",
   },
   {
     slug: "oxygen-laser-therapy",
     title: "Oxygen Laser Therapy",
     icon: Wind,
-    image: OltImg,
+    image: OltNewImg,
     category: "Hair",
     summary:
-      "A scalp-rejuvenating session that pairs oxygenation with low-level laser light to revive follicles, calm inflammation, and support healthier growth.",
+      "Advanced non-invasive treatment that improves scalp health, controls dandruff, reduces hair fall, and promotes natural hair growth using oxygen-powered laser technology.",
   },
   {
-    slug: "mesotherapy",
-    title: "Mesotherapy",
-    icon: Syringe,
-    image: MesotherapyImg,
+    slug: "cosmetic-hair-system",
+    title: "Cosmetic Hair System",
+    icon: Crown,
+    image: CosmeticHairSystemImg,
     category: "Hair",
     summary:
-      "A minimally invasive scalp treatment that delivers vitamins, peptides, and growth factors directly into the dermis to strengthen roots and reduce hair fall.",
+      "A non-surgical solution for hair thinning or baldness. Customized to match your hair color, texture, and style, delivering immediate, natural-looking results safely and painlessly.",
   },
   {
-    slug: "regen-pro-9",
-    title: "Regen Pro 9",
-    icon: Atom,
-    image: RegenProImg,
+    slug: "prp-pro-stemx27",
+    title: "PRP Pro+ StemX27",
+    icon: Sparkles,
+    image: PrpStemX27Img,
     category: "Hair",
     summary:
-      "An advanced regenerative protocol combining nine targeted growth factors to reactivate dormant follicles and accelerate visible regrowth.",
-  },
-  {
-    slug: "stem-x-27",
-    title: "Stem X 27",
-    icon: Leaf,
-    image: StemXImg,
-    category: "Hair",
-    summary:
-      "A 27-factor stem-cell-derived therapy that nourishes the scalp at a cellular level — ideal for early thinning and chronic shedding.",
-  },
-  {
-    slug: "prp",
-    title: "PRP",
-    icon: Droplets,
-    image: PrpImg,
-    category: "Hair",
-    summary:
-      "Platelet-rich plasma drawn from your own blood, processed and reintroduced into the scalp to stimulate natural growth and improve density.",
-  },
-  {
-    slug: "scalp-micropigmentation",
-    title: "Scalp Micropigmentation",
-    icon: Brush,
-    image: SmpImg,
-    category: "Hair",
-    summary:
-      "A precision pigmentation technique that mimics the look of a fuller hairline — ideal for thinning crowns, scar camouflage, and clean buzz looks.",
+      "Combines platelet-rich plasma with StemX27 growth factor technology to stimulate dormant follicles, strengthen roots, improve scalp health, and promote natural hair regrowth.",
   },
   {
     slug: "beard-transplant",
     title: "Beard Transplant",
     icon: User,
-    image: BeardTransplantImg,
+    image: BeardTransplantNewImg,
     category: "Hair",
     summary:
-      "Sculpt a fuller, well-defined beard with permanent follicle transfer, designed by our cosmetic team to suit your facial proportions.",
+      "Enhances facial hair density, fills patchy areas, and creates a natural, permanent beard using your own hair follicles. Delivers realistic, long-lasting results with a customized beard design.",
+  },
+  {
+    slug: "scalp-micropigmentation",
+    title: "Scalp Micropigmentation",
+    icon: Brush,
+    image: PrpStemX27Img,
+    category: "Hair",
+    summary:
+      "A precision pigmentation technique that mimics the look of a fuller hairline — ideal for thinning crowns, scar camouflage, and clean buzz looks.",
   },
   {
     slug: "eyebrow-transplant",
     title: "Eyebrow Transplant",
     icon: Eye,
-    image: EyebrowTransplantImg,
+    image: BeardTransplantNewImg,
     category: "Hair",
     summary:
       "Restore sparse, over-plucked, or thinning brows using advanced follicle techniques — permanent, natural-looking results that age beautifully with you.",
@@ -192,7 +196,7 @@ export const hairTreatments = [
     slug: "hair-extension",
     title: "Hair Extension",
     icon: Wand2,
-    image: HairExtensionImg,
+    image: HybridHairTransplantImg,
     category: "Hair",
     summary:
       "High-grade extensions for instant length and volume, fitted by trained stylists to blend seamlessly with your natural hair.",
@@ -201,7 +205,7 @@ export const hairTreatments = [
     slug: "eye-lash-lifting",
     title: "Eye Lash Lifting",
     icon: Sparkles,
-    image: EyelashImg,
+    image: CosmeticHairSystemImg,
     category: "Hair",
     summary:
       "A gentle lift and curl that opens up the eyes for weeks at a time. No daily curling, no extensions — just elevated natural lashes.",
@@ -210,122 +214,104 @@ export const hairTreatments = [
     slug: "microblading",
     title: "Microblading",
     icon: Pencil,
-    image: MicrobladingImg,
+    image: OltNewImg,
     category: "Hair",
     summary:
       "A semi-permanent technique that crafts naturally fuller, hair-stroke brows — tailored shape, color, and density for an effortless everyday look.",
+  },
+  {
+    slug: "mesotherapy",
+    title: "Mesotherapy",
+    icon: Syringe,
+    image: GelPrpImg,
+    category: "Hair",
+    summary:
+      "A minimally invasive scalp treatment that delivers vitamins, peptides, and growth factors directly into the dermis to strengthen roots and reduce hair fall.",
   },
 ];
 
 // Full skin treatment menu.
 export const skinTreatments = [
   {
-    slug: "skin-peels",
-    title: "Skin Peels",
-    icon: Layers,
-    image: SkinPeelsImg,
+    slug: "glutalite-iv-drip",
+    title: "Glutalite IV Drip",
+    icon: TestTube2,
+    image: GlutaliteIvDripImg,
     category: "Skin",
     summary:
-      "Medical-grade chemical peels that gently resurface, brighten, and refine the skin. Customized strength for acne, pigmentation, or dullness.",
+      "A nutrient-rich IV infusion of Glutathione, Vitamin C, and essential nutrients that brightens skin, reduces pigmentation, and supports full-body detoxification and anti-aging.",
   },
   {
-    slug: "q-switch-laser",
-    title: "Q-Switch Laser",
-    icon: Zap,
-    image: QSwitchImg,
+    slug: "chemical-peel",
+    title: "Chemical Peel",
+    icon: Layers,
+    image: ChemicalPeelImg,
     category: "Skin",
     summary:
-      "Precision laser energy that targets deep pigmentation, melasma, and stubborn dark spots. Safe for all skin types with minimal downtime.",
+      "Medical-grade chemical peels that gently resurface, brighten, and refine skin by exfoliating damaged layers and stimulating fresh, healthy cell renewal.",
+  },
+  {
+    slug: "photo-carbon-skin-polish",
+    title: "Photo Carbon Skin Polish",
+    icon: Zap,
+    image: PhotoCarbonImg,
+    category: "Skin",
+    summary:
+      "Combines activated carbon technology with laser energy to deeply cleanse pores, control oil, reduce pigmentation, and restore a radiant complexion.",
   },
   {
     slug: "laser-hair-reduction",
     title: "Laser Hair Reduction",
     icon: Target,
-    image: DiodeLaserImg,
+    image: LaserHairReductionImg,
     category: "Skin",
     summary:
       "Long-lasting, comfortable hair reduction across the face and body using next-generation lasers calibrated to your skin tone and hair type.",
   },
   {
-    slug: "glutathione-iv",
-    title: "Glutathione IV",
-    icon: TestTube2,
-    image: GlutathioneImg,
-    category: "Skin",
-    summary:
-      "A wellness-grade IV protocol designed to support skin clarity, even tone, and antioxidant balance — beauty supported from the inside out.",
-  },
-  {
-    slug: "derma-fillers",
-    title: "Derma Fillers",
-    icon: Pipette,
-    image: DermaFillersImg,
-    category: "Skin",
-    summary:
-      "Hyaluronic-acid fillers used to refine contours, restore lost volume, and gently re-balance facial proportions for a natural finish.",
-  },
-  {
-    slug: "hydra-facial",
-    title: "HydraFacial",
+    slug: "hydra-lift-skin-booster",
+    title: "Hydra Lift Skin Booster",
     icon: Flower2,
-    image: HydraFacialImg,
+    image: HydraLiftImg,
     category: "Skin",
     summary:
-      "A multi-step facial that cleanses, exfoliates, and deeply hydrates the skin — ideal for instantly improved texture, hydration, and clarity.",
-  },
-  {
-    slug: "face-prp",
-    title: "Face PRP",
-    icon: Droplets,
-    image: FacePrpImg,
-    category: "Skin",
-    summary:
-      "Your own platelet-rich plasma applied to the skin to support natural collagen, smoother tone, and a refreshed, lit-from-within glow.",
-  },
-  {
-    slug: "cosmelan-peel",
-    title: "Cosmelan Peel",
-    icon: Sun,
-    image: CosmelanPeelImg,
-    category: "Skin",
-    summary:
-      "A globally recognized depigmenting protocol designed to fade stubborn melasma and uneven tone with measured, lasting results.",
-  },
-  {
-    slug: "mnrf",
-    title: "MNRF",
-    icon: Waves,
-    image: RfFacialsImg,
-    category: "Skin",
-    summary:
-      "Microneedling Radiofrequency that combines micro-channels with controlled RF energy to firm skin, refine pores, and soften scars.",
+      "Deep skin hydration and collagen boost delivered to the dermis — improving elasticity, texture, and radiance for a naturally youthful glow.",
   },
   {
     slug: "lip-micropigmentation",
     title: "Lip Micropigmentation",
     icon: Heart,
-    image: LipMicropigmentationImg,
+    image: LipMicropigmentationNewImg,
     category: "Skin",
     summary:
-      "Subtle pigment placement to enhance the natural color and definition of the lips — soft, fresh, and beautifully understated.",
+      "A semi-permanent cosmetic procedure that enhances lip shape, color, and symmetry for naturally fuller, defined, and youthful-looking lips.",
+  },
+  {
+    slug: "botox-fillers",
+    title: "Botox & Fillers",
+    icon: Sparkles,
+    image: BotoxFillersImg,
+    category: "Skin",
+    summary:
+      "Botox and dermal fillers to reduce wrinkles, restore facial volume, and enhance contours for a refreshed, youthful appearance without surgery.",
+  },
+  {
+    slug: "mnrf",
+    title: "MNRF",
+    icon: Waves,
+    image: MnrfImg,
+    category: "Skin",
+    summary:
+      "Microneedling Radiofrequency that stimulates collagen, tightens skin, minimizes pores, and reduces acne scars for comprehensive skin rejuvenation.",
   },
   {
     slug: "tattoo-removal",
     title: "Tattoo Removal",
     icon: Eraser,
-    image: NdYagImg,
+    image: TattooRemovalImg,
     category: "Skin",
     summary:
-      "Targeted laser sessions that gently break down tattoo pigment, with treatment plans calibrated to ink color, depth, and skin tone.",
-  },
-  {
-    slug: "wart-removal",
-    title: "Wart Removal",
-    icon: Sparkles,
-    image: WartRemovalImg,
-    category: "Skin",
-    summary:
-      "Quick, precise removal of warts and skin tags using safe clinical methods — minimal scarring and rapid recovery.",
+      "Targeted laser sessions that safely break down tattoo pigments without harming surrounding tissue — suitable for complete removal or cover-up lightening.",
   },
 ];
 

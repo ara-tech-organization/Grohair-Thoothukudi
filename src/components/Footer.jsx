@@ -70,7 +70,7 @@ export default function Footer() {
               {services.slice(0, 6).map((s) => (
                 <li key={s.slug}>
                   <Link
-                    to="/services"
+                    to="/Services"
                     className="text-ink-700 transition-colors hover:text-brand-600"
                   >
                     {s.title}
@@ -85,7 +85,14 @@ export default function Footer() {
             <ul className="mt-5 space-y-4 text-sm text-ink-700">
               <li className="flex items-start gap-3">
                 <SocialIcon name="MapPin" className="mt-0.5 h-4 w-4 flex-none text-brand-500" strokeWidth={1.8} />
-                <span>{clinic.address}</span>
+                <a
+                  href={clinic.mapUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="transition-colors hover:text-brand-600"
+                >
+                  {clinic.address}
+                </a>
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="h-4 w-4 flex-none text-brand-500" />

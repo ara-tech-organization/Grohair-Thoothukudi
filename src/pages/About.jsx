@@ -265,7 +265,7 @@ export default function About() {
               Book Appointment
               <ArrowRight className="h-4 w-4" />
             </Button>
-            <Button to="/services" variant="secondary">
+            <Button to="/Services" variant="secondary">
               Explore Treatments
             </Button>
           </div>

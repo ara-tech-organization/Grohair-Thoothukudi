@@ -335,7 +335,7 @@ export default function Privacy() {
               Return Home
             </Button>
             <Link
-              to="/contact"
+              to="/Contact"
               className="btn-base text-ink-700 hover:text-brand-600"
             >
               Contact us

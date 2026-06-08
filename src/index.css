@@ -24,6 +24,10 @@
     background-attachment: fixed;
   }
 
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+  }
+
   ::selection {
     background: rgba(236, 10, 29, 0.18);
     color: #1f1f29;
