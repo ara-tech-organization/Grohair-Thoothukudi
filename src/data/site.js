@@ -5,7 +5,7 @@ export const clinic = {
   tagline: "Hair & Skin Wellness in Thoothukudi — Tailored to Your Lifestyle",
   description:
     "Restore your confidence today with our expert hair restoration and skin wellness solutions. Book your consultation now.",
-  phone: "+91 83798 56789",
+  phone: "+91 73786 56789",
   email: "adgrohairthoothukudi@gmail.com",
   domain: "adgrohair.com",
   website: "https://adgrohair.com",
@@ -27,7 +27,7 @@ export const clinic = {
     },
     {
       label: "WhatsApp",
-      href: "https://wa.me/918379856789",
+      href: "https://wa.me/917378656789",
     },
   ],
 };
