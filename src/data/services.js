@@ -1,37 +1,30 @@
 import {
   Scissors,
   Sparkles,
-  Sun,
-  Wand2,
   Hourglass,
   Droplets,
   Zap,
   Flower2,
-  Eye,
   Leaf,
   Wind,
   Atom,
-  Syringe,
   Crown,
-  Brush,
   User,
-  Pencil,
   Layers,
   TestTube2,
   Heart,
   Eraser,
   Target,
-  Pipette,
   Waves,
+  Wand2,
 } from "lucide-react";
 
 // Treatment images
 // Hair treatments — new images
-import GlutathioneHairImg from "../assets/treatments/glutathione-hair.jpg";
 import GcellImg from "../assets/treatments/gcell.jpg";
 import HybridHairTransplantImg from "../assets/treatments/hybrid-hair-transplant.jpg";
 import RegenPro9Img from "../assets/treatments/regen-pro9-new.png";
-import GelPrpImg from "../assets/treatments/gel-prp.jpg";
+import GelPrpImg from "../assets/treatments/advancedgelprp.png";
 import OltNewImg from "../assets/treatments/olt-new.png";
 import CosmeticHairSystemImg from "../assets/treatments/cosmetic-hair-system.png";
 import PrpStemX27Img from "../assets/treatments/prp-stemx27.png";
@@ -93,15 +86,6 @@ export const serviceCategories = [
 
 // Full hair treatment menu.
 export const hairTreatments = [
-  {
-    slug: "glutathione-iv-drip",
-    title: "Glutathione IV Drip Therapy",
-    icon: TestTube2,
-    image: GlutathioneHairImg,
-    category: "Hair",
-    summary:
-      "Advanced wellness and skin rejuvenation treatment that delivers powerful antioxidants directly into the bloodstream. Known as the body's Master Antioxidant, Glutathione supports detoxification, skin radiance, and overall wellness.",
-  },
   {
     slug: "g-cell-therapy",
     title: "G Cell Therapy",
@@ -173,60 +157,6 @@ export const hairTreatments = [
     category: "Hair",
     summary:
       "Enhances facial hair density, fills patchy areas, and creates a natural, permanent beard using your own hair follicles. Delivers realistic, long-lasting results with a customized beard design.",
-  },
-  {
-    slug: "scalp-micropigmentation",
-    title: "Scalp Micropigmentation",
-    icon: Brush,
-    image: PrpStemX27Img,
-    category: "Hair",
-    summary:
-      "A precision pigmentation technique that mimics the look of a fuller hairline — ideal for thinning crowns, scar camouflage, and clean buzz looks.",
-  },
-  {
-    slug: "eyebrow-transplant",
-    title: "Eyebrow Transplant",
-    icon: Eye,
-    image: BeardTransplantNewImg,
-    category: "Hair",
-    summary:
-      "Restore sparse, over-plucked, or thinning brows using advanced follicle techniques — permanent, natural-looking results that age beautifully with you.",
-  },
-  {
-    slug: "hair-extension",
-    title: "Hair Extension",
-    icon: Wand2,
-    image: HybridHairTransplantImg,
-    category: "Hair",
-    summary:
-      "High-grade extensions for instant length and volume, fitted by trained stylists to blend seamlessly with your natural hair.",
-  },
-  {
-    slug: "eye-lash-lifting",
-    title: "Eye Lash Lifting",
-    icon: Sparkles,
-    image: CosmeticHairSystemImg,
-    category: "Hair",
-    summary:
-      "A gentle lift and curl that opens up the eyes for weeks at a time. No daily curling, no extensions — just elevated natural lashes.",
-  },
-  {
-    slug: "microblading",
-    title: "Microblading",
-    icon: Pencil,
-    image: OltNewImg,
-    category: "Hair",
-    summary:
-      "A semi-permanent technique that crafts naturally fuller, hair-stroke brows — tailored shape, color, and density for an effortless everyday look.",
-  },
-  {
-    slug: "mesotherapy",
-    title: "Mesotherapy",
-    icon: Syringe,
-    image: GelPrpImg,
-    category: "Hair",
-    summary:
-      "A minimally invasive scalp treatment that delivers vitamins, peptides, and growth factors directly into the dermis to strengthen roots and reduce hair fall.",
   },
 ];
 
