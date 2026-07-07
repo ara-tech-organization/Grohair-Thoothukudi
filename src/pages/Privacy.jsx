@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { ArrowRight, Mail, Globe } from "lucide-react";
 
@@ -29,7 +29,9 @@ export default function Privacy() {
       />
 
       <section className="section">
-        <div className="container-px mx-auto max-w-3xl">
+        <div className="container-px mx-auto max-w-5xl lg:grid lg:grid-cols-[220px_1fr] lg:items-start lg:gap-12">
+          <TableOfContents />
+
           <article className="space-y-14 text-[15px] leading-relaxed text-ink-700">
             {/* PRIVACY POLICY */}
             <Section id="privacy-policy" title="Privacy Policy">
@@ -85,7 +87,7 @@ export default function Privacy() {
                 </li>
               </UL>
 
-              <H3>Data and Privacy</H3>
+              <H3 id="data-privacy">Data and Privacy</H3>
               <UL>
                 <li>
                   To have access to {clinic.shortName} - {clinic.city} website
@@ -152,7 +154,7 @@ export default function Privacy() {
                 </li>
               </UL>
 
-              <H3>Telemedicine</H3>
+              <H3 id="telemedicine">Telemedicine</H3>
               <UL>
                 <li>
                   The services shall be provided to you via audio/video
@@ -202,7 +204,7 @@ export default function Privacy() {
                 </li>
               </UL>
 
-              <H3>Payments</H3>
+              <H3 id="payments">Payments</H3>
               <UL>
                 <li>
                   Online payments are done through our trusted gateway partners.{" "}
@@ -224,7 +226,7 @@ export default function Privacy() {
                 </li>
               </UL>
 
-              <H3>Content and Copyrights</H3>
+              <H3 id="content-copyrights">Content and Copyrights</H3>
               <UL>
                 <li>
                   All the contents in website and mobile application are
@@ -330,7 +332,7 @@ export default function Privacy() {
             </Section>
           </article>
 
-          <div className="mt-14 flex flex-wrap items-center justify-center gap-3">
+          <div className="mt-14 flex flex-wrap items-center justify-center gap-3 lg:col-span-2">
             <Button to="/" variant="secondary">
               Return Home
             </Button>
@@ -361,11 +363,114 @@ function Section({ id, title, children }) {
   );
 }
 
-function H3({ children }) {
+function H3({ id, children }) {
   return (
-    <h3 className="mt-8 text-lg font-semibold tracking-tight text-ink-900">
+    <h3
+      id={id}
+      className="mt-8 scroll-mt-24 text-lg font-semibold tracking-tight text-ink-900"
+    >
       {children}
     </h3>
+  );
+}
+
+const TOC_LINKS = [
+  { id: "privacy-policy", label: "Privacy Policy" },
+  {
+    id: "terms-and-conditions",
+    label: "Terms and Conditions",
+    children: [
+      { id: "data-privacy", label: "Data & Privacy" },
+      { id: "telemedicine", label: "Telemedicine" },
+      { id: "payments", label: "Payments" },
+      { id: "content-copyrights", label: "Content & Copyrights" },
+    ],
+  },
+];
+
+const TOC_IDS = TOC_LINKS.flatMap((link) => [
+  link.id,
+  ...(link.children?.map((c) => c.id) ?? []),
+]);
+
+function useActiveSection(ids) {
+  const [activeId, setActiveId] = useState(ids[0]);
+
+  useEffect(() => {
+    const elements = ids
+      .map((id) => document.getElementById(id))
+      .filter(Boolean);
+    if (!elements.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+        if (visible[0]) setActiveId(visible[0].target.id);
+      },
+      { rootMargin: "-96px 0px -70% 0px", threshold: 0 }
+    );
+
+    elements.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, [ids]);
+
+  return activeId;
+}
+
+function TableOfContents() {
+  const activeId = useActiveSection(TOC_IDS);
+
+  return (
+    <nav
+      aria-label="On this page"
+      className="relative mb-10 overflow-hidden rounded-2xl bg-white p-5 shadow-[0_1px_2px_rgba(15,15,20,0.04),0_8px_24px_-12px_rgba(15,15,20,0.10)] ring-1 ring-ink-100 lg:sticky lg:top-24 lg:mb-0 lg:self-start"
+    >
+      <div
+        aria-hidden="true"
+        className="absolute inset-x-0 top-0 h-0.5 bg-brand-gradient"
+      />
+      <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-ink-400">
+        On this page
+      </div>
+      <ul className="mt-4 space-y-0.5 text-sm">
+        {TOC_LINKS.map((link) => (
+          <li key={link.id}>
+            <a
+              href={`#${link.id}`}
+              aria-current={activeId === link.id ? "true" : undefined}
+              className={`block rounded-lg border-l-2 py-1.5 pl-3 pr-2.5 font-medium transition-all duration-200 ${
+                activeId === link.id
+                  ? "border-brand-500 bg-brand-50 text-brand-700"
+                  : "border-transparent text-ink-800 hover:bg-ink-50 hover:text-brand-600"
+              }`}
+            >
+              {link.label}
+            </a>
+            {link.children && (
+              <ul className="mt-0.5 ml-3 space-y-0.5 border-l border-ink-100 pl-3.5">
+                {link.children.map((child) => (
+                  <li key={child.id}>
+                    <a
+                      href={`#${child.id}`}
+                      aria-current={activeId === child.id ? "true" : undefined}
+                      className={`block rounded-lg py-1.5 px-2.5 text-[13px] transition-all duration-200 ${
+                        activeId === child.id
+                          ? "bg-brand-50 font-medium text-brand-700"
+                          : "text-ink-500 hover:bg-ink-50 hover:text-brand-600"
+                      }`}
+                    >
+                      {child.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </li>
+        ))}
+      </ul>
+    </nav>
   );
 }
 

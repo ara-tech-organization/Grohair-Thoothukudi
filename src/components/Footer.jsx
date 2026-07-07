@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Phone } from "lucide-react";
+import { Phone, Heart } from "lucide-react";
 import Logo from "./Logo";
 import SocialIcon from "./SocialIcon";
 import { clinic, navLinks } from "../data/site";
@@ -117,10 +117,19 @@ export default function Footer() {
         </div>
 
         <div className="mt-14 flex flex-col items-start gap-4 border-t border-ink-100 pt-6 text-xs text-ink-500 sm:grid sm:grid-cols-3 sm:items-center sm:gap-4">
-          <div className="sm:justify-self-start">
-            © {year} {clinic.name}. All rights reserved.
+          <div className="flex items-center gap-1 sm:justify-self-start">
+            <Heart className="h-3.5 w-3.5 flex-none fill-red-500 text-red-500" />
+            Crafted by{" "}
+            <a
+              href="https://discovertechnologies.co/"
+              target="_blank"
+              rel="noreferrer"
+              className="font-semibold text-brand-600 hover:text-brand-700 transition-colors"
+            >
+              Ara Discover Technology
+            </a>
           </div>
-          <div className="flex items-center gap-4 sm:justify-self-center">
+          <div className="flex items-center gap-4 sm:col-start-2 sm:justify-self-center sm:justify-end">
             <Link to="/privacy" className="hover:text-ink-700">
               Privacy Policy
             </Link>
@@ -135,15 +144,7 @@ export default function Footer() {
             </Link>
           </div>
           <div className="sm:justify-self-end">
-            Crafted by{" "}
-            <a
-              href="https://discovertechnologies.co/"
-              target="_blank"
-              rel="noreferrer"
-              className="font-semibold text-brand-600 hover:text-brand-700 transition-colors"
-            >
-              Ara Discover Technology
-            </a>
+            © {year} {clinic.name}. All rights reserved.
           </div>
         </div>
       </div>

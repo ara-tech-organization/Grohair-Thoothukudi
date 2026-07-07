@@ -48,7 +48,7 @@ export default function Navbar() {
                 to={link.to}
                 end={link.to === "/"}
                 className={({ isActive }) =>
-                  `relative rounded-full px-4 py-2 text-sm font-bold transition-colors duration-200 ${
+                  `relative rounded-full px-4 py-2 text-sm font-[700] transition-colors duration-200 ${
                     isActive
                       ? "text-brand-700"
                       : "text-ink-600 hover:text-ink-900"
@@ -108,7 +108,7 @@ export default function Navbar() {
                       to={link.to}
                       end={link.to === "/"}
                       className={({ isActive }) =>
-                        `flex items-center justify-between rounded-2xl px-4 py-3 text-base font-bold transition-colors ${
+                        `flex items-center justify-between rounded-2xl px-4 py-3 text-base font-[700] transition-colors ${
                           isActive
                             ? "bg-brand-50 text-brand-700"
                             : "text-ink-700 hover:bg-ink-50"

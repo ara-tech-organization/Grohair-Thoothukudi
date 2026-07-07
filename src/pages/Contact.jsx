@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
+  AlertCircle,
+  ChevronDown,
   Mail,
   MapPin,
   Phone,
@@ -13,21 +15,29 @@ import PageHero from "../components/PageHero";
 import Button from "../components/Button";
 import SocialIcon from "../components/SocialIcon";
 import { clinic } from "../data/site";
+import { services } from "../data/services";
+import { submitForm } from "../lib/submitForm";
 export default function Contact() {
   const navigate = useNavigate();
   const [form, setForm] = useState({
     name: "",
     email: "",
     phone: "",
+    treatment: "",
     message: "",
     company: "",
   });
   const [errors, setErrors] = useState({});
   const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
   const update = (key) => (e) => {
     setForm((prev) => ({ ...prev, [key]: e.target.value }));
     if (errors[key]) setErrors((prev) => ({ ...prev, [key]: undefined }));
+  };
+
+  const setTreatment = (value) => {
+    setForm((prev) => ({ ...prev, treatment: value }));
   };
 
   const validate = () => {
@@ -43,12 +53,33 @@ export default function Contact() {
     return Object.keys(next).length === 0;
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     if (submitting) return;
     if (!validate()) return;
+    setSubmitError("");
     setSubmitting(true);
-    navigate("/thank-you", { state: { type: "contact" } });
+
+    if (form.company) {
+      navigate("/thank-you", { state: { type: "contact" } });
+      return;
+    }
+
+    const selectedTreatment = services.find((s) => s.slug === form.treatment);
+
+    try {
+      await submitForm({
+        name: form.name,
+        email: form.email,
+        phone: form.phone,
+        treatment: selectedTreatment ? selectedTreatment.title : "-",
+        message: form.message,
+      });
+      navigate("/thank-you", { state: { type: "contact" } });
+    } catch {
+      setSubmitError("Something went wrong sending your message. Please try again.");
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -126,6 +157,10 @@ export default function Contact() {
                   onChange={update("phone")}
                   error={errors.phone}
                 />
+                <TreatmentDropdown
+                  value={form.treatment}
+                  onChange={setTreatment}
+                />
                 <div className="sm:col-span-2">
                   <label
                     htmlFor="contact-message"
@@ -160,6 +195,12 @@ export default function Contact() {
                   />
                 </div>
 
+
+                {submitError && (
+                  <div className="sm:col-span-2">
+                    <FieldError text={submitError} />
+                  </div>
+                )}
 
                 <div className="sm:col-span-2 flex items-center justify-between gap-4 pt-2">
                   <p className="text-xs text-ink-400">
@@ -312,6 +353,102 @@ function Field({ label, id, error, ...props }) {
       </label>
       <input id={id} {...props} className="input-base" />
       {error && <FieldError text={error} />}
+    </div>
+  );
+}
+
+function TreatmentDropdown({ value, onChange }) {
+  const [open, setOpen] = useState(false);
+  const rootRef = useRef(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const onClickAway = (e) => {
+      if (rootRef.current && !rootRef.current.contains(e.target)) {
+        setOpen(false);
+      }
+    };
+    const onKeyDown = (e) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("mousedown", onClickAway);
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", onClickAway);
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [open]);
+
+  const selected = services.find((s) => s.slug === value);
+
+  return (
+    <div ref={rootRef} className="relative">
+      <label htmlFor="contact-treatment" className="label-base mb-2 block">
+        Treatment you're interested in
+      </label>
+      <button
+        type="button"
+        id="contact-treatment"
+        onClick={() => setOpen((v) => !v)}
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        className="input-base flex w-full items-center justify-between gap-2 text-left"
+      >
+        <span className={selected ? "text-ink-800" : "text-ink-400"}>
+          {selected ? selected.title : "Select a treatment"}
+        </span>
+        <ChevronDown
+          className={`h-4 w-4 flex-none text-ink-400 transition-transform duration-200 ${
+            open ? "rotate-180" : ""
+          }`}
+        />
+      </button>
+
+      {open && (
+        <ul
+          role="listbox"
+          className="absolute z-20 mt-2 max-h-64 w-full overflow-auto rounded-2xl bg-white p-1.5 shadow-card ring-1 ring-ink-100"
+        >
+          <li>
+            <button
+              type="button"
+              role="option"
+              aria-selected={value === ""}
+              onClick={() => {
+                onChange("");
+                setOpen(false);
+              }}
+              className={`block w-full rounded-xl px-3 py-2 text-left text-sm transition-colors ${
+                value === ""
+                  ? "bg-brand-50 text-brand-700"
+                  : "text-ink-500 hover:bg-ink-50"
+              }`}
+            >
+              Not sure yet
+            </button>
+          </li>
+          {services.map((s) => (
+            <li key={s.slug}>
+              <button
+                type="button"
+                role="option"
+                aria-selected={value === s.slug}
+                onClick={() => {
+                  onChange(s.slug);
+                  setOpen(false);
+                }}
+                className={`block w-full rounded-xl px-3 py-2 text-left text-sm transition-colors ${
+                  value === s.slug
+                    ? "bg-brand-50 text-brand-700"
+                    : "text-ink-700 hover:bg-ink-50"
+                }`}
+              >
+                {s.title}
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }

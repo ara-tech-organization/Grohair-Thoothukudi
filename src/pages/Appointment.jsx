@@ -1,9 +1,7 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
-  CalendarDays,
-  Clock,
   ChevronDown,
   AlertCircle,
   ArrowRight,
@@ -17,23 +15,11 @@ import PageHero from "../components/PageHero";
 import Button from "../components/Button";
 import { hairTreatments, skinTreatments } from "../data/services";
 import { clinic } from "../data/site";
+import { submitForm } from "../lib/submitForm";
 
 const TREATMENT_GROUPS = [
   { label: "Hair", options: hairTreatments.map((t) => t.title) },
   { label: "Skin", options: skinTreatments.map((t) => t.title) },
-];
-
-const TIME_SLOTS = [
-  "10:00",
-  "10:45",
-  "11:30",
-  "12:15",
-  "14:00",
-  "14:45",
-  "15:30",
-  "16:15",
-  "17:00",
-  "17:45",
 ];
 
 const todayISO = () => new Date().toISOString().split("T")[0];
@@ -53,6 +39,7 @@ export default function Appointment() {
   });
   const [errors, setErrors] = useState({});
   const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
   const update = (key) => (e) => {
     const value = e.target.value;
@@ -74,12 +61,37 @@ export default function Appointment() {
     return Object.keys(next).length === 0;
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     if (submitting) return;
     if (!validate()) return;
+    setSubmitError("");
     setSubmitting(true);
-    navigate("/thank-you", { state: { type: "appointment", form } });
+
+    if (form.company) {
+      navigate("/thank-you", { state: { type: "appointment", form } });
+      return;
+    }
+
+    const messageLines = [
+      `Preferred date: ${form.date}`,
+      `Preferred time: ${form.time}`,
+    ];
+    if (form.notes.trim()) messageLines.push("", form.notes.trim());
+
+    try {
+      await submitForm({
+        name: form.name,
+        email: form.email,
+        phone: form.phone,
+        treatment: form.treatment,
+        message: messageLines.join("\n"),
+      });
+      navigate("/thank-you", { state: { type: "appointment", form } });
+    } catch {
+      setSubmitError("Something went wrong booking your appointment. Please try again.");
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -156,62 +168,42 @@ export default function Appointment() {
                   error={errors.phone}
                 />
 
-                <SelectField
-                  label="Treatment"
-                  id="ap-treatment"
+                <TreatmentDropdown
                   value={form.treatment}
-                  onChange={update("treatment")}
                   error={errors.treatment}
-                  placeholder="Choose a treatment"
-                  groups={TREATMENT_GROUPS}
+                  onChange={(value) => {
+                    setForm((prev) => ({ ...prev, treatment: value }));
+                    if (errors.treatment)
+                      setErrors((prev) => ({ ...prev, treatment: undefined }));
+                  }}
                 />
 
                 <div>
                   <label htmlFor="ap-date" className="label-base mb-2 block">
                     Preferred date
                   </label>
-                  <div className="relative">
-                    <input
-                      id="ap-date"
-                      type="date"
-                      min={todayISO()}
-                      value={form.date}
-                      onChange={update("date")}
-                      className="input-base pr-10"
-                    />
-                    <CalendarDays className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-400" />
-                  </div>
+                  <input
+                    id="ap-date"
+                    type="date"
+                    min={todayISO()}
+                    value={form.date}
+                    onChange={update("date")}
+                    className="input-base"
+                  />
                   {errors.date && <FieldError text={errors.date} />}
                 </div>
 
-                <div className="sm:col-span-2">
-                  <label className="label-base mb-3 block">
-                    Time slot
+                <div>
+                  <label htmlFor="ap-time" className="label-base mb-2 block">
+                    Preferred time
                   </label>
-                  <div className="flex flex-wrap gap-2">
-                    {TIME_SLOTS.map((slot) => {
-                      const active = form.time === slot;
-                      return (
-                        <button
-                          key={slot}
-                          type="button"
-                          onClick={() => {
-                            setForm((p) => ({ ...p, time: slot }));
-                            if (errors.time)
-                              setErrors((p) => ({ ...p, time: undefined }));
-                          }}
-                          className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium ring-1 transition-all duration-200 ${
-                            active
-                              ? "bg-brand-gradient text-white ring-transparent shadow-glow"
-                              : "bg-white text-ink-700 ring-ink-200 hover:ring-brand-200 hover:text-brand-700"
-                          }`}
-                        >
-                          <Clock className="h-3.5 w-3.5" />
-                          {slot}
-                        </button>
-                      );
-                    })}
-                  </div>
+                  <input
+                    id="ap-time"
+                    type="time"
+                    value={form.time}
+                    onChange={update("time")}
+                    className="input-base"
+                  />
                   {errors.time && <FieldError text={errors.time} />}
                 </div>
 
@@ -246,6 +238,11 @@ export default function Appointment() {
                   />
                 </div>
 
+                {submitError && (
+                  <div className="sm:col-span-2">
+                    <FieldError text={submitError} />
+                  </div>
+                )}
 
                 <div className="sm:col-span-2 flex flex-col-reverse items-stretch justify-between gap-4 pt-2 sm:flex-row sm:items-center">
                   <p className="text-xs text-ink-400">
@@ -338,51 +335,87 @@ function Field({ label, id, error, ...props }) {
   );
 }
 
-function SelectField({
-  label,
-  id,
-  error,
-  options,
-  groups,
-  placeholder,
-  disabled,
-  ...props
-}) {
+function TreatmentDropdown({ value, onChange, error }) {
+  const [open, setOpen] = useState(false);
+  const rootRef = useRef(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const onClickAway = (e) => {
+      if (rootRef.current && !rootRef.current.contains(e.target)) {
+        setOpen(false);
+      }
+    };
+    const onKeyDown = (e) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("mousedown", onClickAway);
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", onClickAway);
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [open]);
+
   return (
-    <div>
-      <label htmlFor={id} className="label-base mb-2 block">
-        {label}
+    <div ref={rootRef} className="relative">
+      <label htmlFor="ap-treatment" className="label-base mb-2 block">
+        Treatment
       </label>
-      <div className="relative">
-        <select
-          id={id}
-          disabled={disabled}
-          {...props}
-          className={`input-base appearance-none pr-10 ${
-            disabled ? "cursor-not-allowed opacity-60" : "cursor-pointer"
+      <button
+        type="button"
+        id="ap-treatment"
+        onClick={() => setOpen((v) => !v)}
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        className="input-base flex w-full items-center justify-between gap-2 text-left"
+      >
+        <span className={value ? "text-ink-800" : "text-ink-400"}>
+          {value || "Choose a treatment"}
+        </span>
+        <ChevronDown
+          className={`h-4 w-4 flex-none text-ink-400 transition-transform duration-200 ${
+            open ? "rotate-180" : ""
           }`}
+        />
+      </button>
+
+      {open && (
+        <ul
+          role="listbox"
+          className="absolute z-20 mt-2 max-h-64 w-full overflow-auto rounded-2xl bg-white p-1.5 shadow-card ring-1 ring-ink-100"
         >
-          <option value="" disabled>
-            {placeholder}
-          </option>
-          {groups
-            ? groups.map((g) => (
-                <optgroup key={g.label} label={g.label}>
-                  {g.options.map((o) => (
-                    <option key={o} value={o}>
-                      {o}
-                    </option>
-                  ))}
-                </optgroup>
-              ))
-            : options?.map((o) => (
-                <option key={o} value={o}>
-                  {o}
-                </option>
-              ))}
-        </select>
-        <ChevronDown className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-400" />
-      </div>
+          {TREATMENT_GROUPS.map((group) => (
+            <li key={group.label}>
+              <div className="px-3 pb-1 pt-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-400">
+                {group.label}
+              </div>
+              <ul>
+                {group.options.map((option) => (
+                  <li key={option}>
+                    <button
+                      type="button"
+                      role="option"
+                      aria-selected={value === option}
+                      onClick={() => {
+                        onChange(option);
+                        setOpen(false);
+                      }}
+                      className={`block w-full rounded-xl px-3 py-2 text-left text-sm transition-colors ${
+                        value === option
+                          ? "bg-brand-50 text-brand-700"
+                          : "text-ink-700 hover:bg-ink-50"
+                      }`}
+                    >
+                      {option}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </li>
+          ))}
+        </ul>
+      )}
       {error && <FieldError text={error} />}
     </div>
   );

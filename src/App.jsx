@@ -13,7 +13,7 @@ import SkinTreatmentDetail from "./pages/SkinTreatmentDetail";
 
 export default function App() {
   return (
-    <BrowserRouter basename="/Grohair-Thoothukudi">
+    <BrowserRouter>
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
