@@ -71,10 +71,10 @@ const hairFaqs = [
     q: "When will I see hair regrowth after treatment?",
     a: "Initial growth is typically visible from the third or fourth month, with denser, fuller results between months 9 and 12.",
   },
-  {
+  /* {
     q: "Is PRP painful?",
     a: "PRP is performed under topical anesthesia and feels like mild pressure. Most clients return to work the same day with no downtime.",
-  },
+  }, */
   {
     q: "How many Mesotherapy sessions are needed?",
     a: "A standard course is 6–8 sessions spaced 2–3 weeks apart. Maintenance sessions every few months keep results stable.",

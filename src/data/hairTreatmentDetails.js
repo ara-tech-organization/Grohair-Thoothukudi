@@ -170,7 +170,7 @@ export const hairTreatmentDetails = {
     },
   },
 
-  "advanced-gel-prp": {
+  /* "advanced-gel-prp": {
     tagline: "Strengthen Hair Follicles and Restore Growth Naturally",
     intro:
       "Advanced Gel PRP combines PRP therapy with a specialized gel matrix for prolonged growth factor release, stimulating hair regrowth, improving scalp health, and reducing hair fall. Safe, minimally invasive, and effective, it is ideal for early to moderate hair loss.",
@@ -210,7 +210,7 @@ export const hairTreatmentDetails = {
       description:
         "Achieve stronger, thicker, and healthier hair with Advanced Gel PRP. Our specialists will design a personalized treatment plan to restore your hair's natural strength and density.",
     },
-  },
+  }, */
 
   "oxygen-laser-therapy": {
     tagline: "Control Dandruff, Reduce Hair Fall, and Stimulate Hair Growth",
@@ -296,7 +296,7 @@ export const hairTreatmentDetails = {
     },
   },
 
-  "prp-pro-stemx27": {
+  /* "prp-pro-stemx27": {
     tagline: "Next-Generation Hair Regrowth Solution",
     intro:
       "PRP Pro+ StemX27 combines platelet-rich plasma with StemX27 growth factor technology to stimulate dormant follicles, strengthen roots, improve scalp health, and promote natural hair regrowth. Safe, non-surgical, and highly effective for early-stage hair loss.",
@@ -336,7 +336,7 @@ export const hairTreatmentDetails = {
       description:
         "Start your journey to thicker, healthier hair with PRP Pro+ StemX27. Our specialists are ready to evaluate your scalp and design a personalized regrowth plan.",
     },
-  },
+  }, */
 
   "beard-transplant": {
     tagline: "Achieve a Fuller, Well-Defined Beard Naturally",

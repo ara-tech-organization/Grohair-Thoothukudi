@@ -1,10 +1,10 @@
 export const testimonials = [
-  {
+  /* {
     name: "Krishna Kumar",
     role: "PRP Treatment client",
     quote:
       "I had an excellent experience at Advance Grohair, Thoothukudi. I completed 8 PRP sessions here and I am very satisfied with the results. The doctor is highly professional, knowledgeable, and explains every step clearly before the treatment.",
-  },
+  }, */
   {
     name: "Uthaya Kumar",
     role: "Hair Transplant client",

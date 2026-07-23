@@ -68,7 +68,7 @@ const skinFeatured = skinTreatments.filter((t) =>
   ["hydra-lift-skin-booster", "chemical-peel", "laser-hair-reduction"].includes(t.slug)
 );
 const hairFeatured = hairTreatments.filter((t) =>
-  ["hybrid-hair-transplant", "regen-pro-9-gfc", "prp-pro-stemx27"].includes(t.slug)
+  ["hybrid-hair-transplant", "regen-pro-9-gfc", "g-cell-therapy"].includes(t.slug)
 );
 
 export default function Home() {

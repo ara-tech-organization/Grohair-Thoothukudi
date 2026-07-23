@@ -24,10 +24,10 @@ import {
 import GcellImg from "../assets/treatments/gcell.jpg";
 import HybridHairTransplantImg from "../assets/treatments/hybrid-hair-transplant.jpg";
 import RegenPro9Img from "../assets/treatments/regen-pro9-new.png";
-import GelPrpImg from "../assets/treatments/advancedgelprp.png";
+// import GelPrpImg from "../assets/treatments/advancedgelprp.png";
 import OltNewImg from "../assets/treatments/olt-new.png";
 import CosmeticHairSystemImg from "../assets/treatments/cosmetic-hair-system.png";
-import PrpStemX27Img from "../assets/treatments/prp-stemx27.png";
+// import PrpStemX27Img from "../assets/treatments/prp-stemx27.png";
 import BeardTransplantNewImg from "../assets/treatments/beard-transplant-new.png";
 // Skin treatments — new images
 import GlutaliteIvDripImg from "../assets/treatments/glutalite-iv-drip.jpg";
@@ -36,7 +36,6 @@ import PhotoCarbonImg from "../assets/treatments/photo-carbon.png";
 import LaserHairReductionImg from "../assets/treatments/laser-hair-reduction.jpg";
 import HydraLiftImg from "../assets/treatments/hydra-lift.jpg";
 import LipMicropigmentationNewImg from "../assets/treatments/lip-micropigmentation-new.png";
-import BotoxFillersImg from "../assets/treatments/botox-fillers.jpg";
 import MnrfImg from "../assets/treatments/mnrf.jpg";
 import TattooRemovalImg from "../assets/treatments/tattoo-removal.jpg";
 
@@ -113,7 +112,7 @@ export const hairTreatments = [
     summary:
       "Highly concentrated growth factors derived from your own blood to stimulate dormant follicles, promote healthier hair growth, and improve scalp health. Safe, minimally invasive, and non-surgical.",
   },
-  {
+  /* {
     slug: "advanced-gel-prp",
     title: "Advanced Gel PRP",
     icon: Droplets,
@@ -121,7 +120,7 @@ export const hairTreatments = [
     category: "Hair",
     summary:
       "Combines PRP therapy with a specialized gel matrix for prolonged growth factor release, stimulating hair regrowth, improving scalp health, and reducing hair fall. Ideal for early to moderate hair loss.",
-  },
+  }, */
   {
     slug: "oxygen-laser-therapy",
     title: "Oxygen Laser Therapy",
@@ -140,7 +139,7 @@ export const hairTreatments = [
     summary:
       "A non-surgical solution for hair thinning or baldness. Customized to match your hair color, texture, and style, delivering immediate, natural-looking results safely and painlessly.",
   },
-  {
+  /* {
     slug: "prp-pro-stemx27",
     title: "PRP Pro+ StemX27",
     icon: Sparkles,
@@ -148,7 +147,7 @@ export const hairTreatments = [
     category: "Hair",
     summary:
       "Combines platelet-rich plasma with StemX27 growth factor technology to stimulate dormant follicles, strengthen roots, improve scalp health, and promote natural hair regrowth.",
-  },
+  }, */
   {
     slug: "beard-transplant",
     title: "Beard Transplant",
@@ -215,15 +214,6 @@ export const skinTreatments = [
     category: "Skin",
     summary:
       "A semi-permanent cosmetic procedure that enhances lip shape, color, and symmetry for naturally fuller, defined, and youthful-looking lips.",
-  },
-  {
-    slug: "botox-fillers",
-    title: "Botox & Fillers",
-    icon: Sparkles,
-    image: BotoxFillersImg,
-    category: "Skin",
-    summary:
-      "Botox and dermal fillers to reduce wrinkles, restore facial volume, and enhance contours for a refreshed, youthful appearance without surgery.",
   },
   {
     slug: "mnrf",

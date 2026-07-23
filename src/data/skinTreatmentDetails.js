@@ -248,46 +248,6 @@ export const skinTreatmentDetails = {
     },
   },
 
-  "botox-fillers": {
-    tagline: "Smooth, Restore, and Rejuvenate Your Natural Beauty",
-    intro:
-      "Botox and Dermal Fillers reduce visible signs of aging, restore facial volume, and enhance contours for a refreshed, youthful appearance without surgery.",
-    process: {
-      title: "Botox & Fillers Process",
-      description:
-        "After a detailed facial assessment, Botox is applied to relax targeted muscles, softening wrinkles. Dermal Fillers restore volume, enhance contours, and improve balance. Minimally invasive with little to no downtime.",
-    },
-    why: {
-      title: "Why Botox & Fillers?",
-      description:
-        "Botox and Dermal Fillers provide a non-surgical path to a younger, more refreshed appearance. They address wrinkles, volume loss, and facial asymmetry with precision — delivering natural-looking results with minimal recovery time.",
-    },
-    benefits: [
-      "Reduces fine lines and wrinkles",
-      "Restores facial volume",
-      "Enhances facial contours and symmetry",
-      "Quick, safe, and minimally invasive",
-      "Long-lasting, natural-looking results",
-    ],
-    whyChoose: {
-      title: "Why Choose Advanced GroHair & GloSkin Clinic?",
-      description:
-        "Achieve a youthful, naturally rejuvenated appearance with Botox and Fillers at Advanced GroHair & GloSkin Clinic. Our experienced aesthetic specialists use advanced techniques to deliver balanced, natural results.",
-      points: [
-        "Experienced Aesthetic Specialists",
-        "Personalized Facial Assessment",
-        "Advanced Injection Techniques",
-        "Safe & Hygienic Environment",
-        "Natural & Balanced Results",
-      ],
-    },
-    cta: {
-      title: "Book Your Botox & Fillers Consultation Today",
-      description:
-        "Achieve a youthful, naturally rejuvenated appearance with Botox and Fillers at Advanced GroHair & GloSkin Clinic. Our specialists will design a personalized plan that respects your natural features.",
-    },
-  },
-
   "mnrf": {
     tagline: "Renew, Repair, and Rejuvenate Your Skin Naturally",
     intro:
